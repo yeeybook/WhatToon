@@ -19,12 +19,18 @@ public class activity_login extends AppCompatActivity {
             public void onClick(View v){
                 switch (v.getId())
                 {
+
                     case R.id.button2:
                         Intent intent = new Intent(activity_login.this, activity_join.class);
                         startActivity(intent);
                         break;
 
                     case R.id.button3:
+                        break;
+
+                    case R.id.temporary:
+                        Intent intent1=new Intent(activity_login.this,activity_bottom.class);
+                        startActivity(intent1);
                         break;
 
                 }
@@ -37,6 +43,9 @@ public class activity_login extends AppCompatActivity {
         //ID/PW찾기 버튼
         Button find_btn = (Button)findViewById(R.id.button3);
         find_btn.setOnClickListener(listener);
+        //임시버튼
+        Button temp_btn = (Button)findViewById(R.id.temporary);
+        temp_btn.setOnClickListener(listener);
 
 
 
