@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity_join"></activity>
         <activity android:name=".activity_login" />
+        <activity android:name=".activity_bottom" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

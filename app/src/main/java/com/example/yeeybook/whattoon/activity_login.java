@@ -29,8 +29,8 @@ public class activity_login extends AppCompatActivity {
                         break;
 
                     case R.id.temporary:
-                        Intent intent1=new Intent(activity_login.this,activity_bottom.class);
-                        startActivity(intent1);
+                        Intent intent2=new Intent(activity_login.this,activity_bottom.class);
+                        startActivity(intent2);
                         break;
 
                 }

@@ -24,6 +24,7 @@
         android:layout_marginBottom="148dp"
         android:autofillHints="PW"
         android:ems="10"
+
         android:hint="PASSWARD"
         android:inputType="textPassword"
         android:textSize="18sp"
