@@ -75,13 +75,14 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="234dp"
-        android:layout_height="32dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="11dp"
         android:text="WHATTOONDEVELOPERS"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/temporary"
         app:layout_constraintVertical_bias="0.944" />
 
     <EditText
@@ -97,5 +98,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.214" />
+
+    <Button
+        android:id="@+id/temporary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="607dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="33dp"
+        android:text="임시버튼"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

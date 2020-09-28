@@ -26,6 +26,7 @@ public class activity_login extends AppCompatActivity {
 
                     case R.id.button3:
                         break;
+
                 }
             }
         };
@@ -36,6 +37,8 @@ public class activity_login extends AppCompatActivity {
         //ID/PW찾기 버튼
         Button find_btn = (Button)findViewById(R.id.button3);
         find_btn.setOnClickListener(listener);
+
+
 
     }
 
