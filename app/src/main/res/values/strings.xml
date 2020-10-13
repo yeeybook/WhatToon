@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">WhatToon</string>
+    <string name="WhatToon_Logo">WhatToon_logo</string>
+    <string name="WTD">WHATTOONDEVELOPERS</string>
+    <string name="ID">ID</string>
+    <string name="PW">Password</string>
+    <string name="Name">닉네임</string>
+    <string name="Login_Btn">로그인</string>
+    <string name="Join_Btn">회원가입</string>
+    <string name="JoinPage"><font color='000000'><b>회원가입</b></font></string>
+    <string name="Check_Btn">중복확인</string>
+    <string name="GenderM">남</string>
+    <string name="GenderF">여</string>
+
+
 </resources>

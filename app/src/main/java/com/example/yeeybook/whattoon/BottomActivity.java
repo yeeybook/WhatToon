@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class activity_bottom extends AppCompatActivity {
+public class BottomActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;//하단바
 
