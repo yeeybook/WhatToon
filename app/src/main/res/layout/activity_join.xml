@@ -30,13 +30,13 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/EmailTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/ID"/>
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/IdCheckBtn"
@@ -57,7 +57,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/NameTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -76,7 +76,7 @@
 
     <!--PW-->
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/PasswordTxt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -121,14 +121,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/JoinBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:text="Button" />
+        android:text="@string/Join_Btn" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -137,4 +137,6 @@
         android:layout_marginTop="50dp"
         android:layout_weight="0.8">
     </LinearLayout>
+
+
 </LinearLayout>

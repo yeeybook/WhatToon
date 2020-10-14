@@ -5,30 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="50dp"
+    android:weightSum="6"
     tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="4"
+        android:layout_weight="2"
         android:contentDescription="@string/WhatToon_Logo"
         app:srcCompat="@drawable/whattoon_logo" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="350dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="@string/ID"
-        android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="350dp"
+        android:id="@+id/EmailTxt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/PasswordTxt"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center"
@@ -47,7 +49,7 @@
         >
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/LoginBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -57,7 +59,7 @@
 
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/JoinBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -75,6 +77,8 @@
         android:gravity="center_horizontal"
         android:text="@string/WTD"
         android:textSize="20sp" />
+
+
 
 
 </LinearLayout>
