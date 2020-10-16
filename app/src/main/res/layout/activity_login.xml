@@ -47,24 +47,34 @@
         android:layout_weight="0.7"
         android:layout_marginBottom="50dp"
         >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" /> <!--empty space-->
 
         <Button
             android:id="@+id/LoginBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="20dp"
+            android:layout_weight="0.3"
             android:text="@string/Login_Btn" />
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" /> <!--empty space-->
 
         <Button
             android:id="@+id/JoinBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginRight="50dp"
+            android:layout_weight="0.3"
             android:text="@string/Join_Btn" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" /> <!--empty space-->
 
     </LinearLayout>
 

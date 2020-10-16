@@ -47,12 +47,16 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75" /> <!--empty space-->
+
     <!-- Name -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -74,24 +78,32 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75" /> <!--empty space-->
+
     <!--PW-->
     <EditText
         android:id="@+id/PasswordTxt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75" /> <!--empty space-->
 
     <!--성별-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
         android:layout_weight="1"
         android:orientation="horizontal">
         <RadioGroup
@@ -120,23 +132,27 @@
         </RadioGroup>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/JoinBtn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="@string/Join_Btn" />
+        android:layout_weight="0.75" /> <!--empty space-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_weight="0.8">
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:id="@+id/JoinBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/Join_Btn" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75" /> <!--empty space-->
 
 
 </LinearLayout>
