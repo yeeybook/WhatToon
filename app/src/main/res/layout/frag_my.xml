@@ -6,10 +6,17 @@
     android:orientation="vertical"
     >
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RecommenderBtn"
+        android:text="추천 받기">
+    </Button>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4번화면입니다."
-        android:textSize="40sp"/>
+        android:textSize="10sp"
+        android:id="@+id/RecommenderTv"/>
 
 </LinearLayout>
