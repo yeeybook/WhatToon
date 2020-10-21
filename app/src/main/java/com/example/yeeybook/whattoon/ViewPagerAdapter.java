@@ -61,7 +61,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "추천";
+                return "인기";
             case 1:
                 return "월";
             case 2:

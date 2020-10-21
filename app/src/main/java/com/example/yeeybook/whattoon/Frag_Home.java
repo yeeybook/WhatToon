@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,9 @@ public class Frag_Home extends Fragment {
     private View view;
 
     private FragmentPagerAdapter fragmentPagerAdapter;
+    private Spinner spinner;
+    int spinner_value=0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +36,21 @@ public class Frag_Home extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.frag_home,container,false);
+
+        spinner = (Spinner)view.findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //스피너 선택 시 값 다르게 넘어감
+                spinner_value=i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         ViewPager viewPager=(ViewPager)view.findViewById(R.id.viewPager);
         fragmentPagerAdapter=new ViewPagerAdapter(getChildFragmentManager());
         TabLayout tabLayout=(TabLayout)view.findViewById(R.id.tab_layout);
