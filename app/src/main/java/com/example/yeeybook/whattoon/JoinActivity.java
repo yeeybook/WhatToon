@@ -1,6 +1,7 @@
 package com.example.yeeybook.whattoon;
 
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,6 @@ public class JoinActivity extends AppCompatActivity {
                 final String name = NameJoin.getText().toString().trim();
                 //공백인 부분을 제거하고 보여주는 trim();
 
-
                 firebaseAuth.createUserWithEmailAndPassword(email, pwd)
                         .addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -81,7 +81,8 @@ public class JoinActivity extends AppCompatActivity {
                                     DatabaseReference reference = database.getReference("Users");
                                     reference.child(uid).setValue(hashMap);
 
-                                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
+//                                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                                     startActivity(intent);
                                     finish();
                                     Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();

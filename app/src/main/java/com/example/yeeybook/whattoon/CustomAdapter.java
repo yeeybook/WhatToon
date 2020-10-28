@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
+import java.lang.reflect.Field;
 import java.util.List;
 
 public class CustomAdapter extends BaseAdapter {
@@ -55,8 +54,9 @@ public class CustomAdapter extends BaseAdapter {
         }
 
         listViewHolder.textInListView.setText(listStorage.get(position).getContent());
-        int imageResourceId = this.context.getResources().getIdentifier(listStorage.get(position).getImageResource(), "drawable", this.context.getPackageName());
-        listViewHolder.imageInListView.setImageResource(imageResourceId);
+
+       int imgaeResourceId = this.context.getResources().getIdentifier("img"+listStorage.get(position).getImageId(), "drawable", this.context.getPackageName()); //가져온 id에 따라 이미지 이름 다름
+        listViewHolder.imageInListView.setImageResource(imgaeResourceId);
         return view;
         }
 

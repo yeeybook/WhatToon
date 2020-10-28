@@ -4,11 +4,11 @@ package com.example.yeeybook.whattoon;
 public class ItemObject {
 
     private String content;
-    private String imageResource;
+    private int imageId;
 
-    public ItemObject(String content, String imageResource) {
+    public ItemObject(String content, int imageId) {
         this.content = content;
-        this.imageResource = imageResource;
+        this.imageId = imageId;
     }
 
     public String getContent() {
@@ -19,11 +19,11 @@ public class ItemObject {
         this.content = content;
     }
 
-    public String getImageResource() {
-        return imageResource;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setImageResource(String imageResource) {
-        this.imageResource = imageResource;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

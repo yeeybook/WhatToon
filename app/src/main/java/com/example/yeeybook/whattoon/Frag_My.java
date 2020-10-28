@@ -24,7 +24,7 @@ public class Frag_My extends Fragment {
 
     private View view;
     private MyAPI myAPI;
-    private final String BASE_URL = "https://e562856b3076.ngrok.io/";
+    private final String BASE_URL = "https://9e83161576a6.ngrok.io/";
     private Button RecommenderBtn;
     private TextView RecommenderTv;
     private final String TAG = getClass().getSimpleName();

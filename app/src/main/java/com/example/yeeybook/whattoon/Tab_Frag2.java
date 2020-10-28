@@ -90,7 +90,8 @@ public class Tab_Frag2 extends Fragment {
                 sample.setDay(tokens[2]);
                 sample.setThumbnail(tokens[3]);
                 webtoonSamples.add(sample);
-                items.add(new ItemObject(sample.getTitle(),sample.getThumbnail()));
+                items.add(new ItemObject(sample.getTitle(),sample.getId()));
+//                items.add(new ItemObject(sample.getTitle(),sample.getThumbnail()));
                 Log.d("MyActivity","Just created: "+sample);
 
             }
