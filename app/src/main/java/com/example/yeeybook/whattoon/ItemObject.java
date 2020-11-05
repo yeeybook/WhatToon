@@ -1,6 +1,5 @@
 package com.example.yeeybook.whattoon;
 
-
 public class ItemObject {
 
     private String content;

@@ -25,6 +25,7 @@ public class Tab_Frag2 extends Fragment {
 
     private GridView gv;
 
+//    String platform = "naver";////
 
     //프래그먼트 상태 저장
     public static Tab_Frag2 newInstance() {
@@ -37,6 +38,11 @@ public class Tab_Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_frag2,container,false);
+//        Bundle bundle = getArguments();////
+//        if(getArguments() != null) {
+//            platform = bundle.getString("platform");////
+////            Toast.makeText(getActivity(),"값 전달됨", Toast.LENGTH_SHORT).show();
+//        }
 
         readWebtoonData();
 
@@ -66,7 +72,13 @@ public class Tab_Frag2 extends Fragment {
     private List<ItemObject> items= new ArrayList<>();
 
     private void readWebtoonData() {
-        InputStream is = getResources().openRawResource(R.raw.naver_monday);
+        InputStream is = getResources().openRawResource(R.raw.naver_monday);////
+//        InputStream is;////
+//        if(platform.equals("naver")){////
+//            is = getResources().openRawResource(R.raw.naver_monday);////
+//        }else{////
+//            is = getResources().openRawResource(R.raw.naver_saturday);////
+//        }////
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
