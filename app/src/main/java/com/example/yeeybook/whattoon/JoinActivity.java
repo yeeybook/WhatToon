@@ -1,8 +1,8 @@
 package com.example.yeeybook.whattoon;
 
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,8 +66,22 @@ public class JoinActivity extends AppCompatActivity {
                         .addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if (task.isSuccessful()) {
+                                if(!task.isSuccessful()) {
+                                    try {
+                                        throw task.getException();
+                                    } catch(FirebaseAuthWeakPasswordException e) {
+                                        PwdJoin.setError(getString(R.string.error_weak_password));
+                                        PwdJoin.requestFocus();
+                                    } catch(FirebaseAuthInvalidCredentialsException e) {
+                                        EmailJoin.setError(getString(R.string.error_invalid_email));
+                                        EmailJoin.requestFocus();
+                                    } catch(FirebaseAuthUserCollisionException e) {
+                                        EmailJoin.setError(getString(R.string.error_user_exists));
+                                        EmailJoin.requestFocus();
+                                    } catch(Exception e) {
+                                        Log.e("TAG", e.getMessage());
+                                    }
+                                }else{
 
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
                                     String uid = user.getUid();
@@ -88,9 +105,6 @@ public class JoinActivity extends AppCompatActivity {
                                     Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
 
 
-                                } else {
-                                    Toast.makeText(JoinActivity.this, "등록 에러", Toast.LENGTH_SHORT).show();
-                                    return;
                                 }
                             }
                         });

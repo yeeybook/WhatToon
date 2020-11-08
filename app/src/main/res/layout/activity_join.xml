@@ -38,13 +38,6 @@
             android:hint="@string/Email"
             android:inputType="textEmailAddress" />
 
-        <Button
-            android:id="@+id/IdCheckBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/Check_Btn" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -69,12 +62,6 @@
             android:inputType="textPersonName"
             android:hint="@string/Name" />
 
-        <Button
-            android:id="@+id/NameCheckBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/Check_Btn" />
 
     </LinearLayout>
 
