@@ -98,6 +98,12 @@ public class JoinActivity extends AppCompatActivity {
                                     DatabaseReference reference = database.getReference("Users");
                                     reference.child(uid).setValue(hashMap);
 
+                                    HashMap<Object,String> hashMap2 = new HashMap<>();
+                                    hashMap2.put("WebtoonId","0");
+                                    hashMap2.put("title","0");
+                                    hashMap2.put("rate","0");
+                                    database.getReference("Users/"+uid+"/Ratings").setValue(hashMap2);
+
 //                                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
                                     Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                                     startActivity(intent);
