@@ -35,6 +35,7 @@ public class Spinner_Frag2 extends Fragment {
         TabLayout tabLayout=(TabLayout)view.findViewById(R.id.tab_layout1);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(fragmentPagerAdapter);
+        viewPager.setCurrentItem(0);
 
         return view;
     }
