@@ -70,7 +70,7 @@ public class Tab_Frag55 extends Fragment {
 
     private void readWebtoonData() {
         InputStream is;
-        is = getResources().openRawResource(R.raw.naver_thursday);
+        is = getResources().openRawResource(R.raw.daum_thursday);
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
