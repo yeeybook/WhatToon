@@ -1,4 +1,4 @@
-package com.example.yeeybook.whattoon;
+package com.example.yeeybook.whattoon.naver;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.yeeybook.whattoon.CustomAdapter;
+import com.example.yeeybook.whattoon.ItemObject;
+import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonSample;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,28 +25,28 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab_Frag9 extends Fragment {
+public class Tab_Frag8 extends Fragment {
 
     private View view;
     private GridView gv;
 
-    //프래그먼트 상태 저장
-    public static Tab_Frag9 newInstance() {
 
-        Tab_Frag9 tab_frag9=new Tab_Frag9();
-        return tab_frag9;
+    //프래그먼트 상태 저장
+    public static Tab_Frag8 newInstance() {
+
+        Tab_Frag8 tab_frag8=new Tab_Frag8();
+        return tab_frag8;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tab_frag9,container,false);
-
+        view = inflater.inflate(R.layout.tab_frag8,container,false);
         readWebtoonData();
 
         //gridview reference
 
-        gv=(GridView)view.findViewById(R.id.gridview9);
+        gv=(GridView)view.findViewById(R.id.gridview8);
 
         List<ItemObject> allItems = getAllItemObject();
         CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
@@ -65,7 +70,9 @@ public class Tab_Frag9 extends Fragment {
     private List<ItemObject> items= new ArrayList<>();
 
     private void readWebtoonData() {
-        InputStream is = getResources().openRawResource(R.raw.naver_complete);
+        InputStream is;
+        is = getResources().openRawResource(R.raw.naver_sunday);
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -86,8 +93,7 @@ public class Tab_Frag9 extends Fragment {
                 WebtoonSample sample = new WebtoonSample();
                 sample.setId(Integer.parseInt(tokens[0]));
                 sample.setTitle(tokens[1]);
-                sample.setDay(tokens[2]);
-                sample.setThumbnail(tokens[3]);
+                sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
                 Log.d("MyActivity","Just created: "+sample);

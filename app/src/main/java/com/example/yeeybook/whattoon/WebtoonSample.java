@@ -4,8 +4,7 @@ public class WebtoonSample {
 
     private int id;
     private String title;
-    private String day;
-    private String thumbnail;
+    private String author;
 
     public int getId() {
         return id;
@@ -23,28 +22,21 @@ public class WebtoonSample {
         this.title = title;
     }
 
-    public String getDay(){
-        return day;
+    public String getAuthor(){
+        return author;
     }
-    public void setDay(String day){
-        this.day =day;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
+    public void setAuthor(String day){
+        this.author =day;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
+
 
     @Override
     public String toString() {
         return "WebtoonSample{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", day='" + day + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
+                ", author='" + author + '\'' +
                 '}';
     }
 

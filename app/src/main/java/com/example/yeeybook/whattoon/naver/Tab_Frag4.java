@@ -1,4 +1,4 @@
-package com.example.yeeybook.whattoon;
+package com.example.yeeybook.whattoon.naver;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.yeeybook.whattoon.CustomAdapter;
+import com.example.yeeybook.whattoon.ItemObject;
+import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonSample;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,6 +31,7 @@ public class Tab_Frag4 extends Fragment {
 
     private GridView gv;
 
+
     //프래그먼트 상태 저장
     public static Tab_Frag4 newInstance() {
 
@@ -37,7 +43,6 @@ public class Tab_Frag4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_frag4,container,false);
-
         readWebtoonData();
 
         //gridview reference
@@ -66,7 +71,9 @@ public class Tab_Frag4 extends Fragment {
     private List<ItemObject> items= new ArrayList<>();
 
     private void readWebtoonData() {
-        InputStream is = getResources().openRawResource(R.raw.naver_wednesday);
+        InputStream is;
+        is = getResources().openRawResource(R.raw.naver_wednesday);
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -87,8 +94,7 @@ public class Tab_Frag4 extends Fragment {
                 WebtoonSample sample = new WebtoonSample();
                 sample.setId(Integer.parseInt(tokens[0]));
                 sample.setTitle(tokens[1]);
-                sample.setDay(tokens[2]);
-                sample.setThumbnail(tokens[3]);
+                sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
                 Log.d("MyActivity","Just created: "+sample);

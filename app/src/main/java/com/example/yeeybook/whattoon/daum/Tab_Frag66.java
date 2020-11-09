@@ -1,4 +1,4 @@
-package com.example.yeeybook.whattoon;
+package com.example.yeeybook.whattoon.daum;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.yeeybook.whattoon.CustomAdapter;
+import com.example.yeeybook.whattoon.ItemObject;
+import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonSample;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,46 +25,37 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab_Frag2 extends Fragment {
-    private View view;
+public class Tab_Frag66 extends Fragment {
 
+    private View view;
     private GridView gv;
 
-//    String platform = "naver";////
 
     //프래그먼트 상태 저장
-    public static Tab_Frag2 newInstance() {
+    public static Tab_Frag66 newInstance() {
 
-        Tab_Frag2 tab_frag2 =new Tab_Frag2();
-        return tab_frag2;
+        Tab_Frag66 tab_frag66=new Tab_Frag66();
+        return tab_frag66;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tab_frag2,container,false);
-//        Bundle bundle = getArguments();////
-//        if(getArguments() != null) {
-//            platform = bundle.getString("platform");////
-////            Toast.makeText(getActivity(),"값 전달됨", Toast.LENGTH_SHORT).show();
-//        }
-
+        view = inflater.inflate(R.layout.tab_frag6,container,false);
         readWebtoonData();
 
         //gridview reference
 
-        gv=(GridView)view.findViewById(R.id.gridview2);
+        gv=(GridView)view.findViewById(R.id.gridview6);
 
         List<ItemObject> allItems = getAllItemObject();
         CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
         //adapter
-        //gv.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,rankwebtoon));
         gv.setAdapter(customAdapter);
         //Item clicks
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getActivity(),rankwebtoon[i], Toast.LENGTH_SHORT).show();
                 //클릭했을때
                 Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
             }
@@ -72,13 +68,9 @@ public class Tab_Frag2 extends Fragment {
     private List<ItemObject> items= new ArrayList<>();
 
     private void readWebtoonData() {
-        InputStream is = getResources().openRawResource(R.raw.naver_monday);////
-//        InputStream is;////
-//        if(platform.equals("naver")){////
-//            is = getResources().openRawResource(R.raw.naver_monday);////
-//        }else{////
-//            is = getResources().openRawResource(R.raw.naver_saturday);////
-//        }////
+        InputStream is;
+        is = getResources().openRawResource(R.raw.daum_friday);
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -99,11 +91,9 @@ public class Tab_Frag2 extends Fragment {
                 WebtoonSample sample = new WebtoonSample();
                 sample.setId(Integer.parseInt(tokens[0]));
                 sample.setTitle(tokens[1]);
-                sample.setDay(tokens[2]);
-                sample.setThumbnail(tokens[3]);
+                sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
-//                items.add(new ItemObject(sample.getTitle(),sample.getThumbnail()));
                 Log.d("MyActivity","Just created: "+sample);
 
             }

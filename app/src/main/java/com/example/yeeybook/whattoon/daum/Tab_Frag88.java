@@ -1,4 +1,4 @@
-package com.example.yeeybook.whattoon;
+package com.example.yeeybook.whattoon.daum;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,16 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
+import com.example.yeeybook.whattoon.CustomAdapter;
+import com.example.yeeybook.whattoon.ItemObject;
+import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonSample;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -24,30 +25,28 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab_Frag1 extends Fragment {
+public class Tab_Frag88 extends Fragment {
 
     private View view;
-
     private GridView gv;
 
 
     //프래그먼트 상태 저장
-    public static Tab_Frag1 newInstance() {
+    public static Tab_Frag88 newInstance() {
 
-        Tab_Frag1 tab_frag1=new Tab_Frag1();
-        return tab_frag1;
+        Tab_Frag88 tab_frag88=new Tab_Frag88();
+        return tab_frag88;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tab_frag1,container,false);
-
+        view = inflater.inflate(R.layout.tab_frag8,container,false);
         readWebtoonData();
 
         //gridview reference
 
-        gv=(GridView)view.findViewById(R.id.gridview1);
+        gv=(GridView)view.findViewById(R.id.gridview8);
 
         List<ItemObject> allItems = getAllItemObject();
         CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
@@ -71,7 +70,9 @@ public class Tab_Frag1 extends Fragment {
     private List<ItemObject> items= new ArrayList<>();
 
     private void readWebtoonData() {
-        InputStream is = getResources().openRawResource(R.raw.naver_monday);
+        InputStream is;
+        is = getResources().openRawResource(R.raw.daum_sunday);
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -92,8 +93,7 @@ public class Tab_Frag1 extends Fragment {
                 WebtoonSample sample = new WebtoonSample();
                 sample.setId(Integer.parseInt(tokens[0]));
                 sample.setTitle(tokens[1]);
-                sample.setDay(tokens[2]);
-                sample.setThumbnail(tokens[3]);
+                sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
                 Log.d("MyActivity","Just created: "+sample);
@@ -115,6 +115,4 @@ public class Tab_Frag1 extends Fragment {
 
         return items;
     }
-
-
 }
