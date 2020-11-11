@@ -29,6 +29,12 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:gravity="right">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평가"
+            android:id="@+id/RatingBtn"
+            android:layout_gravity="right" />
         <TextView
             android:id="@+id/LogoutTv"
             android:layout_width="wrap_content"
@@ -45,39 +51,45 @@
         android:visibility="gone"
         android:id="@+id/ResultLayout"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="강예서님께서 좋아하실 만한 작품은"
+            android:text="님께서 좋아하실 만한 작품은"
             android:textSize="15sp"
             android:layout_gravity="center"
             android:id="@+id/ResultTv0"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="0.2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
                 android:text="1번"
                 android:textSize="15sp"
-                android:id="@+id/ResultTv1"/>
+                android:id="@+id/ResultTv1" />
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img370"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/ResultImg1"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
         </LinearLayout>
 
         <LinearLayout
@@ -85,18 +97,28 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
                 android:text="2번"
                 android:textSize="15sp"
                 android:id="@+id/ResultTv2" />
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img370"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/ResultImg2"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
         </LinearLayout>
 
         <LinearLayout
@@ -104,18 +126,28 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
                 android:text="3번"
                 android:textSize="15sp"
                 android:id="@+id/ResultTv3"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img370"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/ResultImg3"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
         </LinearLayout>
 
         <LinearLayout
@@ -123,18 +155,28 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
                 android:text="4번"
                 android:textSize="15sp"
                 android:id="@+id/ResultTv4"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img370"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/ResultImg4"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
         </LinearLayout>
 
         <LinearLayout
@@ -142,18 +184,28 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
                 android:text="5번"
                 android:textSize="15sp"
                 android:id="@+id/ResultTv5"/>
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:src="@drawable/img370"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/ResultImg5"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"/>
         </LinearLayout>
 <!--        <LinearLayout-->
 <!--            android:layout_width="match_parent"-->

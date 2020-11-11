@@ -20,7 +20,7 @@ public class RecommenderItem
     public double getVal5 () { return val5; }
     public void setVal5 (double val5) { this.val5 = val5; }
 
-    public String getTitle1 () { return title1; }
+    public String getTitle1 () { return title1; } // title이라 해놨는데 실제론 id값 받아오는 거임
     public void setTitle1 (String title1) { this.title1 = title1; }
 
     public String getTitle2 () { return title2; }
