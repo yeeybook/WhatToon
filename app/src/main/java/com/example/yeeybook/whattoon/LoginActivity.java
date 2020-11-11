@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar LoginPb;
-    private Button join, login, RatingBtn;
+    private Button join, login;
     private EditText email_login, pwd_login;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener; // 로그인이 됐는지 안됐는지 체크해주는 부분(로그인 유지 위해)
@@ -49,15 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        RatingBtn = findViewById(R.id.RatingBtn);
-        RatingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                 startActivity(intent);
             }
         });
