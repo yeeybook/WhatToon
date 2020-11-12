@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.yeeybook.whattoon.Rating.RatingActivity1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -98,20 +99,17 @@ public class JoinActivity extends AppCompatActivity {
                                     DatabaseReference reference = database.getReference("Users");
                                     reference.child(uid).setValue(hashMap);
 
-                                    HashMap<Object,String> hashMap2 = new HashMap<>();
-                                    hashMap2.put("webtoonId","0");
-                                    hashMap2.put("title","0");
-                                    hashMap2.put("rate","0");
-                                    database.getReference("Users/"+uid+"/Ratings").setValue(hashMap2);
+//                                    HashMap<Object,String> hashMap2 = new HashMap<>();
+//                                    hashMap2.put("webtoonId","0");
+//                                    hashMap2.put("title","0");
+//                                    hashMap2.put("rate","0");
+//                                    database.getReference("Users/"+uid+"/Ratings").setValue(hashMap2);
 
-//                                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
-                                    firebaseAuth.signOut(); //자동적으로 로그인 된 상태라서 로그아웃 시켜주는 코드 임시로 넣음
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                                    firebaseAuth.signOut(); //자동적으로 로그인 된 상태라서 로그아웃 시켜주는 코드 임시로 넣음
+                                    Intent intent = new Intent(getApplicationContext(), RatingActivity1.class);
                                     startActivity(intent);
                                     finish();
                                     Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-
-
                                 }
                             }
                         });

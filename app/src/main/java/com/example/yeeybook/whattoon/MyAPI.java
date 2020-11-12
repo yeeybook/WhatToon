@@ -15,7 +15,7 @@ public interface MyAPI {
 
     @FormUrlEncoded
     @POST("predict/")
-    Call<RecommenderItem> post_recommenders(@Field("uid") String currentUser);
+    Call<RecommenderItem> post_recommenders(@Field("uid") String currentUid);
 
 //    @POST("predict/")
 //    Call<RecommenderItem> post_recommenders(@Body RecommenderItem recommenderItem);

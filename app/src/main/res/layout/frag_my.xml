@@ -10,7 +10,12 @@
         android:layout_weight="9"
         android:gravity="center"
         android:visibility="visible"
-        android:id="@+id/RecommenderLayout">
+        android:id="@+id/RecommenderLayout"
+        android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="4"/>-->
         <Button
             android:layout_width="200dp"
             android:layout_height="80dp"
@@ -22,6 +27,21 @@
             android:textStyle="bold|italic"
             android:textSize="16sp">
         </Button>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"/>-->
+<!--        <ProgressBar-->
+<!--            android:id="@+id/ResultPb"-->
+<!--            android:layout_width="45dp"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:visibility="invisible"-->
+<!--            style="?android:attr/progressBarStyleLarge" /> &lt;!&ndash;로딩 중 표시 위해&ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="3"/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -34,6 +54,7 @@
             android:layout_height="wrap_content"
             android:text="평가"
             android:id="@+id/RatingBtn"
+            android:visibility="gone"
             android:layout_gravity="right" />
         <TextView
             android:id="@+id/LogoutTv"
@@ -56,18 +77,24 @@
             android:layout_height="wrap_content"
             android:text="님께서 좋아하실 만한 작품은"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:layout_gravity="center"
             android:id="@+id/ResultTv0"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"/>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/ResultLl1">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,9 +102,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:text="1번"
+                android:layout_weight="2"
+                android:text=""
                 android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/ResultTv1" />
             <ImageView
                 android:layout_width="0dp"
@@ -91,12 +120,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:id="@+id/ResultLine1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/ResultLl2">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -104,9 +140,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:text="2번"
+                android:layout_weight="2"
+                android:text=""
                 android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/ResultTv2" />
             <ImageView
                 android:layout_width="0dp"
@@ -120,12 +158,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:id="@+id/ResultLine2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/ResultLl3">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -133,9 +178,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:text="3번"
+                android:layout_weight="2"
+                android:text=""
                 android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/ResultTv3"/>
             <ImageView
                 android:layout_width="0dp"
@@ -149,12 +196,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:id="@+id/ResultLine3"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/ResultLl4">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -162,9 +216,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:text="4번"
+                android:layout_weight="2"
+                android:text=""
                 android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/ResultTv4"/>
             <ImageView
                 android:layout_width="0dp"
@@ -178,12 +234,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:id="@+id/ResultLine4"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/ResultLl5">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -191,9 +254,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:text="5번"
+                android:layout_weight="2"
+                android:text=""
                 android:textSize="15sp"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/ResultTv5"/>
             <ImageView
                 android:layout_width="0dp"
@@ -207,20 +272,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"/>
         </LinearLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="0.3"-->
-<!--            android:gravity="center">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="입니다."-->
-<!--                android:textSize="15sp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:id="@+id/ResultTv6"/>-->
-
-<!--        </LinearLayout>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:id="@+id/ResultLine5"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -45,7 +45,7 @@
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:visibility="gone"
-        style="?android:attr/progressBarStyleLarge" />
+        style="?android:attr/progressBarStyleLarge" /> <!--로딩 중 표시 위해-->
 
     <LinearLayout
         android:layout_width="match_parent"

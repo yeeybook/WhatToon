@@ -13,7 +13,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         try {
-            Thread.sleep(1000); //1초간 대기
+            Thread.sleep(500); //0.5초간 대기
         }
         catch (InterruptedException e){
             e.printStackTrace();

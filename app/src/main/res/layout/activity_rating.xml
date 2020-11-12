@@ -4,15 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RatingActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    tools:context="Rating.RatingActivity1"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:gravity="center"
+        android:id="@+id/RatingLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="왓툰에 오신 것을 환영합니다!\n"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:id="@+id/welcomeTv"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취향에 맞는 작품을 추천 받으려면"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:id="@+id/guideTv1"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="웹툰을 먼저 평가해 주세요\n"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:id="@+id/guideTv2"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="평가하러 가기"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="#1F7AE2"
+            android:id="@+id/RatingBtn"
+            android:padding="2dp"/>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -30,7 +72,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img370"/>
+            android:src="@drawable/img370"
+            android:id="@+id/RatingImg1"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -42,7 +85,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="대학일기"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv1"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -76,7 +120,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img27"/>
+            android:src="@drawable/img27"
+            android:id="@+id/RatingImg2"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -88,7 +133,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="신의 탑"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv2"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -122,7 +168,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img361"/>
+            android:src="@drawable/img361"
+            android:id="@+id/RatingImg3"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -134,7 +181,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="신과 함께"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv3"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -168,7 +216,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img366"/>
+            android:src="@drawable/img366"
+            android:id="@+id/RatingImg4"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -180,7 +229,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="하이브"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv4"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -214,7 +264,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img161"/>
+            android:src="@drawable/img161"
+            android:id="@+id/RatingImg5"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -226,7 +277,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="나노마신"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv5"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -260,7 +312,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:src="@drawable/img166"/>
+            android:src="@drawable/img166"
+            android:id="@+id/RatingImg6"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -272,7 +325,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:text="가담항설"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:id="@+id/RatingTv6"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -298,7 +352,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:gravity="right|center">
+        android:gravity="center"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이전"
+            android:id="@+id/prevBtn"/>
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
