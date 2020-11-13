@@ -1,6 +1,7 @@
 package com.example.yeeybook.whattoon;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.yeeybook.whattoon.Rating.RatingActivity1;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
@@ -37,7 +41,7 @@ public class JoinActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
-
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,8 @@ public class JoinActivity extends AppCompatActivity {
         NameJoin=(EditText)findViewById(R.id.NameTxt);
         RadioGroup = (RadioGroup) findViewById(R.id.radioGroupGender);
         Btn = (Button) findViewById(R.id.JoinBtn);
-
         firebaseAuth = FirebaseAuth.getInstance();
+
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,21 +87,47 @@ public class JoinActivity extends AppCompatActivity {
                                         Log.e("TAG", e.getMessage());
                                     }
                                 }else{
+                                    imageUri = Uri.parse("android.resource://"+getPackageName()+"/"+R.drawable.default_profile); // 기본 이미지 uri 저장
+                                    final String uid = firebaseAuth.getCurrentUser().getUid();
+                                    FirebaseStorage.getInstance().getReference("UserImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) { // storage에 이미지 업로드 성공했는지 안했는지 판단
+                                            FirebaseStorage.getInstance().getReference("UserImages").child(uid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    UserModel userModel = new UserModel();
+                                                    userModel.uid = uid;
+                                                    userModel.email = email;
+                                                    userModel.name = name;
+                                                    userModel.gender = gender;
+                                                    userModel.profileImgUrl = uri.toString();
 
-                                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                                    String uid = user.getUid();
+                                                    FirebaseDatabase.getInstance().getReference("Users").child(uid).setValue(userModel);
 
-                                    //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
-                                    HashMap<Object,String> hashMap = new HashMap<>();
+                                                    Intent intent = new Intent(getApplicationContext(), RatingActivity1.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                    Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
 
-                                    hashMap.put("email",email);
-                                    hashMap.put("uid",uid);
-                                    hashMap.put("gender",gender);
-                                    hashMap.put("name",name);
+//                                            imageUrl = task.getResult().getUploadSessionUri().toString(); // storage에 업로드 된 이미지 주소
 
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference reference = database.getReference("Users");
-                                    reference.child(uid).setValue(hashMap);
+                                        }
+                                    });
+
+//                                    //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
+//                                    HashMap<Object,String> hashMap = new HashMap<>();
+//
+//                                    hashMap.put("email",email);
+//                                    hashMap.put("uid",uid);
+//                                    hashMap.put("gender",gender);
+//                                    hashMap.put("name",name);
+////                                    hashMap.put("profileImgUrl", )
+//
+//                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                                    DatabaseReference reference = database.getReference("Users");
+//                                    reference.child(uid).setValue(hashMap);
 
 //                                    HashMap<Object,String> hashMap2 = new HashMap<>();
 //                                    hashMap2.put("webtoonId","0");
@@ -106,10 +136,11 @@ public class JoinActivity extends AppCompatActivity {
 //                                    database.getReference("Users/"+uid+"/Ratings").setValue(hashMap2);
 
 //                                    firebaseAuth.signOut(); //자동적으로 로그인 된 상태라서 로그아웃 시켜주는 코드 임시로 넣음
-                                    Intent intent = new Intent(getApplicationContext(), RatingActivity1.class);
-                                    startActivity(intent);
-                                    finish();
-                                    Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+
+//                                    Intent intent = new Intent(getApplicationContext(), RatingActivity1.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                    Toast.makeText(JoinActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

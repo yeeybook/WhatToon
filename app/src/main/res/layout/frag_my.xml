@@ -12,43 +12,91 @@
         android:visibility="visible"
         android:id="@+id/RecommenderLayout"
         android:orientation="vertical">
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="4"/>-->
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="80dp"
-            android:id="@+id/RecommenderBtn"
-            android:text="내 취향에 맞는 웹툰\n추천 받기"
-            android:layout_gravity="center"
-            android:background="#1F7AE2"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:textSize="16sp">
-        </Button>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1"/>-->
-<!--        <ProgressBar-->
-<!--            android:id="@+id/ResultPb"-->
-<!--            android:layout_width="45dp"-->
-<!--            android:layout_height="45dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="invisible"-->
-<!--            style="?android:attr/progressBarStyleLarge" /> &lt;!&ndash;로딩 중 표시 위해&ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="3"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp" />
+            <TextView
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameProfileTv"
+                android:text=""
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"/>
+            <Button
+                android:layout_width="90dp"
+                android:layout_height="28dp"
+                android:text="프로필 수정"
+                android:layout_marginBottom="10dp"
+                android:background="#E0E0E0"
+                android:id="@+id/editProfileBtn"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_centerInParent="true"
+                android:background="#E0E0E0"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:text="  내가 평가한 작품들                                              >"
+                    android:textSize="17dp"/>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:background="#E0E0E0"/>-->
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#E0E0E0"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:id="@+id/RecommenderBtn"
+                android:text="내 취향에 맞는 웹툰\n추천 받기"
+                android:layout_gravity="center"
+                android:background="#1F7AE2"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold|italic"
+                android:textSize="15sp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:gravity="right">
+        android:gravity="right"
+        android:orientation="vertical">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +112,11 @@
             android:layout_marginRight="8dp"
             android:clickable="true"
             android:text="로그아웃" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:background="#E0E0E0"/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -88,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerInParent="true"
-            android:background="#D3D3D3"/>
+            android:background="#E0E0E0"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
