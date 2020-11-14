@@ -25,4 +25,11 @@
         android:icon="@drawable/ic_baseline_person_24"
         android:title="MY"/>
 
+    <item
+        android:id="@+id/action_rated"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="평가"
+        android:visible="false"/>
+
 </menu>

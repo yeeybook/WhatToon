@@ -25,7 +25,7 @@ public class RatingActivity4 extends AppCompatActivity {
     Button nextBtn, prevBtn;
     ImageView RatingImg1, RatingImg2, RatingImg3, RatingImg4, RatingImg5, RatingImg6;
     TextView RatingTv1, RatingTv2, RatingTv3, RatingTv4, RatingTv5, RatingTv6;
-    String [] webtoonList = {"513", "408", "5", "369", "257", "55"};
+    int [] webtoonList = {513, 408, 5, 369, 257, 55};
     String [] titleList = {"세로토닌", "이태원 클라쓰", "파이게임", "치즈인더트랩", "유미의 세포들", "바른연애 길잡이"};
     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public static AppCompatActivity activity;
@@ -93,7 +93,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[0]);
                 hashMap.put("title", titleList[0]);
                 hashMap.put("rate", v); //별점 값 받아옴
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[0]).updateChildren(hashMap);
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[0])).updateChildren(hashMap);
             }
         });
         star2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -103,7 +103,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[1]);
                 hashMap.put("title", titleList[1]);
                 hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[1]).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[1])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
             }
         });
         star3.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -113,7 +113,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[2]);
                 hashMap.put("title", titleList[2]);
                 hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[2]).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[2])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
             }
         });
         star4.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -123,7 +123,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[3]);
                 hashMap.put("title", titleList[3]);
                 hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[3]).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[3])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
             }
         });
         star5.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -133,7 +133,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[4]);
                 hashMap.put("title", titleList[4]);
                 hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[4]).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[4])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
             }
         });
         star6.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -143,7 +143,7 @@ public class RatingActivity4 extends AppCompatActivity {
                 hashMap.put("webtoonId", webtoonList[5]);
                 hashMap.put("title", titleList[5]);
                 hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(webtoonList[5]).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[5])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
             }
         });
     }

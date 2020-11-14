@@ -21,6 +21,7 @@ public class BottomActivity extends AppCompatActivity {
     private Frag_Favorite frag_favorite;
     private Frag_Search frag_search;
     private Frag_My frag_my;
+    private Frag_Rated frag_rated; // 숨겨놓은 5번째 프래그먼트
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public class BottomActivity extends AppCompatActivity {
                     case R.id.action_my:
                         setFrag(3);
                         break;
+
+                    case R.id.action_rated:
+                        setFrag(4);
                 }
                 return true;
             }
@@ -57,13 +61,14 @@ public class BottomActivity extends AppCompatActivity {
         frag_favorite = new Frag_Favorite();
         frag_search = new Frag_Search();
         frag_my = new Frag_My();
+        frag_rated = new Frag_Rated();
         setFrag(0);//첫 화면 설정
 
     }
 
     //프래그먼트 교체 일어나는 실행문
 
-    private void setFrag(int n){
+    public void setFrag(int n){
 
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
@@ -86,6 +91,11 @@ public class BottomActivity extends AppCompatActivity {
 
             case 3:
                 ft.replace(R.id.main_frame,frag_my);
+                ft.commit();
+                break;
+
+            case 4:
+                ft.replace(R.id.main_frame, frag_rated);
                 ft.commit();
                 break;
         }

@@ -15,10 +15,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.7"
             android:orientation="vertical"
             android:gravity="center">
-
             <ImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="120dp"
@@ -38,15 +37,14 @@
                 android:layout_width="90dp"
                 android:layout_height="28dp"
                 android:text="프로필 수정"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="18dp"
                 android:background="#E0E0E0"
                 android:id="@+id/editProfileBtn"/>
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="vertical">
             <View
                 android:layout_width="match_parent"
@@ -55,12 +53,19 @@
                 android:background="#E0E0E0"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"/>
+                android:layout_height="2dp"
+                android:orientation="vertical"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="27dp"
+                    android:layout_height="23dp"
                     android:text="  내가 평가한 작품들                                              >"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:id="@+id/showRatedTv"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RatedRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 <!--            <View-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="2dp"-->
@@ -102,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="평가"
             android:id="@+id/RatingBtn"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_gravity="right" />
         <TextView
             android:id="@+id/LogoutTv"
@@ -255,7 +260,6 @@
             android:layout_centerInParent="true"
             android:background="#D3D3D3"
             android:id="@+id/ResultLine3"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

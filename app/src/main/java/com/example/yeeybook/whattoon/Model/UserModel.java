@@ -1,4 +1,4 @@
-package com.example.yeeybook.whattoon;
+package com.example.yeeybook.whattoon.Model;
 
 public class UserModel {
     public String email;

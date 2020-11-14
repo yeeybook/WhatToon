@@ -17,12 +17,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.yeeybook.whattoon.Model.RatingModel;
+import com.example.yeeybook.whattoon.Model.UserModel;
+import com.example.yeeybook.whattoon.Model.WebtoonModel;
+import com.example.yeeybook.whattoon.Rating.RatingActivity1;
+import com.example.yeeybook.whattoon.Rating.RatingActivity2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -32,16 +36,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.example.yeeybook.whattoon.Rating.RatingActivity1;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,8 +63,8 @@ public class Frag_My extends Fragment {
     private final String BASE_URL = "https://af1292babd70.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
-    private Button RatingBtn, RecommenderBtn, BackBtn, editProfileBtn;
-    private TextView ResultTv0, ResultTv1, ResultTv2, ResultTv3, ResultTv4, ResultTv5, LogoutTv, nameProfileTv;
+    private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;
+    private TextView ResultTv0, ResultTv1, ResultTv2, ResultTv3, ResultTv4, ResultTv5, LogoutTv, nameProfileTv, showRatedTv;
     private ImageView ResultImg1, ResultImg2, ResultImg3, ResultImg4, ResultImg5, imgProfile, imgProfileDialog;
     private LinearLayout RecommenderLayout, ResultLayout, ResultLl1, ResultLl2, ResultLl3, ResultLl4, ResultLl5;
     private FirebaseAuth firebaseAuth;
@@ -71,27 +77,74 @@ public class Frag_My extends Fragment {
     private static final int PICK_FROM_ALBUM = 10;
     private Uri imageUri;
 
+    private RecyclerView mRatedRecyclerView;
+    private RatedPrevAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_my, container, false);
-        RatingBtn = view.findViewById(R.id.RatingBtn);RecommenderBtn = view.findViewById(R.id.RecommenderBtn);BackBtn = view.findViewById(R.id.BackBtn);editProfileBtn = view.findViewById(R.id.editProfileBtn);
+        RecommenderBtn = view.findViewById(R.id.RecommenderBtn);BackBtn = view.findViewById(R.id.BackBtn);editProfileBtn = view.findViewById(R.id.editProfileBtn);RatingBtn = view.findViewById(R.id.RatingBtn);
         RecommenderLayout = view.findViewById(R.id.RecommenderLayout);ResultLayout = view.findViewById(R.id.ResultLayout);
         ResultLl1 = view.findViewById(R.id.ResultLl1);ResultLl2 = view.findViewById(R.id.ResultLl2);ResultLl3 = view.findViewById(R.id.ResultLl3);ResultLl4 = view.findViewById(R.id.ResultLl4);ResultLl5 = view.findViewById(R.id.ResultLl5);
         ResultLine1 = view.findViewById(R.id.ResultLine1);ResultLine2 = view.findViewById(R.id.ResultLine2);ResultLine3 = view.findViewById(R.id.ResultLine3);ResultLine4 = view.findViewById(R.id.ResultLine4);ResultLine5 = view.findViewById(R.id.ResultLine5);
         ResultTv0 = view.findViewById(R.id.ResultTv0);ResultTv1 = view.findViewById(R.id.ResultTv1);ResultTv2 = view.findViewById(R.id.ResultTv2);ResultTv3 = view.findViewById(R.id.ResultTv3);ResultTv4 = view.findViewById(R.id.ResultTv4);ResultTv5 = view.findViewById(R.id.ResultTv5);
-        LogoutTv = view.findViewById(R.id.LogoutTv);nameProfileTv = view.findViewById(R.id.nameProfileTv);
+        LogoutTv = view.findViewById(R.id.LogoutTv);nameProfileTv = view.findViewById(R.id.nameProfileTv);showRatedTv = view.findViewById(R.id.showRatedTv);
         ResultImg1 = view.findViewById(R.id.ResultImg1);ResultImg2 = view.findViewById(R.id.ResultImg2);ResultImg3 = view.findViewById(R.id.ResultImg3);ResultImg4 = view.findViewById(R.id.ResultImg4);ResultImg5 = view.findViewById(R.id.ResultImg5);imgProfile = view.findViewById(R.id.imgProfile);
         imgProfile = view.findViewById(R.id.imgProfile);
 
-        FirebaseDatabase.getInstance().getReference().child("Users").addValueEventListener(new ValueEventListener() {
+        mRatedRecyclerView = view.findViewById(R.id.RatedRecyclerView); // 띄울 리사이클러뷰 바인딩
+
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // 수평 리사이클러뷰를 위해
+        mRatedRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new RatedPrevAdapter();
+
+        RatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+            public void onClick(View view) {
+                Intent a = new Intent(getActivity().getApplicationContext(), RatingActivity1.class);
+                startActivity(a);
+            }
+        });
+
+        showRatedTv.setOnClickListener(new View.OnClickListener() { // 내가 평가한 작품들 텍스트 클릭 시
+            @Override
+            public void onClick(View view) {
+                BottomActivity activity = (BottomActivity)getActivity();
+                activity.setFrag(4); // 숨겨져 있던 Rated_Frag로 바꾸는 함수 호출
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("Users").addValueEventListener(new ValueEventListener() { // 프로필 사진, 이름 띄움
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()){
                     UserModel userModel = snapshot.getValue(UserModel.class);
                     if(currentUid.equals(userModel.uid)){ // 현재 로그인 중인 사용자의 uid가 일치할 때
                         Glide.with(getContext()).load(userModel.profileImgUrl).apply(new RequestOptions().circleCrop()).into(imgProfile); // 이미지 가져와서 띄우고
                         nameProfileTv.setText(userModel.name); // 이름 가져와서 띄움
+
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").addValueEventListener(new ValueEventListener() { // 평가한 항목들 가져오기(사진만 미리보기)
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                int Max = 10; // 최대 10개까지만 보여줄거임
+                                ArrayList<RatedPrevData> data = new ArrayList<>();
+                             for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                                 RatingModel ratingModel = snapshot1.getValue(RatingModel.class);
+                                 if(ratingModel.rate > 0) { // 평가한 데이터만 보여줌
+                                     data.add(new RatedPrevData(ratingModel.webtoonId));
+                                     mAdapter.setData(data);
+                                     mRatedRecyclerView.setAdapter(mAdapter);
+                                     Max--;
+                                 }
+                                 if(Max==0) break;
+                             }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) { }
+                        });
                         break;
                     }
                 }
@@ -107,14 +160,6 @@ public class Frag_My extends Fragment {
             @Override
             public void onClick(View view) {
                 showProfileDialog(view.getContext());
-            }
-        });
-
-        RatingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), RatingActivity1.class);
-                startActivity(intent);
             }
         });
 
