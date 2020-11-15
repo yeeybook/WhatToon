@@ -23,6 +23,7 @@ public class RatingActivity2 extends AppCompatActivity {
     LinearLayout RatingLayout;
     RatingBar star1, star2, star3, star4, star5, star6;
     Button nextBtn, prevBtn;
+    TextView pageTv;
     ImageView RatingImg1, RatingImg2, RatingImg3, RatingImg4, RatingImg5, RatingImg6;
     TextView RatingTv1, RatingTv2, RatingTv3, RatingTv4, RatingTv5, RatingTv6;
     int [] webtoonList = {537, 382, 429, 358, 539, 259};
@@ -58,6 +59,8 @@ public class RatingActivity2 extends AppCompatActivity {
         RatingTv6 = findViewById(R.id.RatingTv6);
         nextBtn = findViewById(R.id.nextBtn);
         prevBtn = findViewById(R.id.prevBtn);
+        pageTv = findViewById(R.id.pageTv);
+        pageTv.setText("2 / 5");
 
         RatingImg1.setImageResource(getResources().getIdentifier("img"+webtoonList[0], "drawable", getPackageName()));
         RatingImg2.setImageResource(getResources().getIdentifier("img"+webtoonList[1], "drawable", getPackageName()));

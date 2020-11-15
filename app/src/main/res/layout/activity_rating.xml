@@ -55,6 +55,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible">
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="평가가 많을수록 정확도가 올라가요!"-->
+<!--        android:textSize="13dp"-->
+<!--        android:id="@+id/hintTv"-->
+<!--        android:layout_gravity="center"/>-->
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -92,6 +99,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -140,6 +148,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -188,6 +197,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -236,6 +246,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -284,6 +295,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -332,6 +344,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="7">
                 <RatingBar
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -351,21 +364,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:layout_gravity="center">
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:text="이전"
+            android:textSize="15dp"
             android:id="@+id/prevBtn"/>
         <LinearLayout
             android:layout_width="180dp"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="페이지 표시"
+                android:textSize="15dp"
+                android:id="@+id/pageTv"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:text="다음"
+            android:textSize="15dp"
             android:id="@+id/nextBtn"/>
     </LinearLayout>
 </LinearLayout>

@@ -7,4 +7,5 @@ public class WebtoonModel {
     public String story;
     public String title;
     public int webtoonId;
+    public int favorite;
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.yeeybook.whattoon.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,7 @@ public class RatingActivity1 extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
     RatingBar star1, star2, star3, star4, star5, star6;
     Button nextBtn, RatingBtn;
+    TextView pageTv;
     LinearLayout RatingLayout;
     int [] webtoonList = {370, 27, 361, 366, 161, 166};
     String [] titleList = {"대학일기", "신의 탑", "신과 함께", "하이브", "나노마신", "가담항설"};
@@ -41,6 +43,8 @@ public class RatingActivity1 extends AppCompatActivity {
         RatingLayout = findViewById(R.id.RatingLayout);
         nextBtn = findViewById(R.id.nextBtn);
         RatingBtn = findViewById(R.id.RatingBtn);
+        pageTv = findViewById(R.id.pageTv);
+        pageTv.setText("1 / 5");
 
         RatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
