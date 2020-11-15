@@ -102,13 +102,13 @@
         android:layout_weight="0.5"
         android:gravity="right"
         android:orientation="vertical">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="평가"
-            android:id="@+id/RatingBtn"
-            android:visibility="visible"
-            android:layout_gravity="right" />
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="평가"-->
+<!--            android:id="@+id/RatingBtn"-->
+<!--            android:visibility="visible"-->
+<!--            android:layout_gravity="right" />-->
         <TextView
             android:id="@+id/LogoutTv"
             android:layout_width="wrap_content"

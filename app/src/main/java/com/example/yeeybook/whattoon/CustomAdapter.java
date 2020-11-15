@@ -55,8 +55,8 @@ public class CustomAdapter extends BaseAdapter {
 
         listViewHolder.textInListView.setText(listStorage.get(position).getContent());
 
-       int imgaeResourceId = this.context.getResources().getIdentifier("img"+listStorage.get(position).getImageId(), "drawable", this.context.getPackageName()); //가져온 id에 따라 이미지 이름 다름
-        listViewHolder.imageInListView.setImageResource(imgaeResourceId);
+       int imageResourceId = this.context.getResources().getIdentifier("img"+listStorage.get(position).getImageId(), "drawable", this.context.getPackageName()); //가져온 id에 따라 이미지 이름 다름
+        listViewHolder.imageInListView.setImageResource(imageResourceId);
         return view;
         }
 

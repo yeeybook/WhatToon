@@ -1,5 +1,6 @@
 package com.example.yeeybook.whattoon.naver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.yeeybook.whattoon.CustomAdapter;
 import com.example.yeeybook.whattoon.ItemObject;
 import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonProfileActivity;
 import com.example.yeeybook.whattoon.WebtoonSample;
 
 import java.io.BufferedReader;
@@ -28,9 +30,8 @@ import java.util.List;
 public class Tab_Frag7 extends Fragment {
 
     private View view;
-
     private GridView gv;
-
+    private ArrayList<Integer> IdList = new ArrayList<Integer>();
 
     //프래그먼트 상태 저장
     public static Tab_Frag7 newInstance() {
@@ -58,9 +59,9 @@ public class Tab_Frag7 extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getActivity(),rankwebtoon[i], Toast.LENGTH_SHORT).show();
-                //클릭했을때
-                Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
+                startActivity(a);
             }
         });
 
@@ -97,6 +98,7 @@ public class Tab_Frag7 extends Fragment {
                 sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
+                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
                 Log.d("MyActivity","Just created: "+sample);
 
             }

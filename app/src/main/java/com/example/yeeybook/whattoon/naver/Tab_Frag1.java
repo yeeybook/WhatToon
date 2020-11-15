@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.yeeybook.whattoon.BottomActivity;
 import com.example.yeeybook.whattoon.CustomAdapter;
 import com.example.yeeybook.whattoon.ItemObject;
 import com.example.yeeybook.whattoon.R;
@@ -28,10 +29,8 @@ import java.util.List;
 public class Tab_Frag1 extends Fragment {
 
     private View view;
-
     private GridView gv;
-
-
+    private ArrayList<Integer> IdList = new ArrayList<Integer>();
 
     //프래그먼트 상태 저장
     public static Tab_Frag1 newInstance() {
@@ -62,6 +61,7 @@ public class Tab_Frag1 extends Fragment {
 
                 //클릭했을때
                 Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -98,7 +98,7 @@ public class Tab_Frag1 extends Fragment {
                 sample.setTitle(tokens[1]);
                 sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
-                items.add(new ItemObject(sample.getTitle(),sample.getId()));
+                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
                 Log.d("MyActivity","Just created: "+sample);
 
             }

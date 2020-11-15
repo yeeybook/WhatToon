@@ -85,7 +85,8 @@ public class Frag_My extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_my, container, false);
-        RecommenderBtn = view.findViewById(R.id.RecommenderBtn);BackBtn = view.findViewById(R.id.BackBtn);editProfileBtn = view.findViewById(R.id.editProfileBtn);RatingBtn = view.findViewById(R.id.RatingBtn);
+        RecommenderBtn = view.findViewById(R.id.RecommenderBtn);BackBtn = view.findViewById(R.id.BackBtn);editProfileBtn = view.findViewById(R.id.editProfileBtn);
+//        RatingBtn = view.findViewById(R.id.RatingBtn);
         RecommenderLayout = view.findViewById(R.id.RecommenderLayout);ResultLayout = view.findViewById(R.id.ResultLayout);
         ResultLl1 = view.findViewById(R.id.ResultLl1);ResultLl2 = view.findViewById(R.id.ResultLl2);ResultLl3 = view.findViewById(R.id.ResultLl3);ResultLl4 = view.findViewById(R.id.ResultLl4);ResultLl5 = view.findViewById(R.id.ResultLl5);
         ResultLine1 = view.findViewById(R.id.ResultLine1);ResultLine2 = view.findViewById(R.id.ResultLine2);ResultLine3 = view.findViewById(R.id.ResultLine3);ResultLine4 = view.findViewById(R.id.ResultLine4);ResultLine5 = view.findViewById(R.id.ResultLine5);
@@ -101,13 +102,13 @@ public class Frag_My extends Fragment {
         mRatedRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RatedPrevAdapter();
 
-        RatingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a = new Intent(getActivity().getApplicationContext(), RatingActivity1.class);
-                startActivity(a);
-            }
-        });
+//        RatingBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent a = new Intent(getActivity().getApplicationContext(), RatingActivity1.class);
+//                startActivity(a);
+//            }
+//        });
 
         showRatedTv.setOnClickListener(new View.OnClickListener() { // 내가 평가한 작품들 텍스트 클릭 시
             @Override

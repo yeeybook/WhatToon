@@ -21,7 +21,6 @@ class RatedAdapter extends RecyclerView.Adapter<RatedViewHolder> {
 
     @Override
     public RatedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         // 사용할 아이템의 뷰를 생성해준다.
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_rated, parent, false);
@@ -58,7 +57,6 @@ class RatedViewHolder extends RecyclerView.ViewHolder { // ViewHolder를 상속�
 }
 
 class RatedData {
-
     private int imgId;
     private float rateVal;
     private String title;

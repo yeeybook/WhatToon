@@ -1,5 +1,6 @@
 package com.example.yeeybook.whattoon.naver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,10 +13,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.yeeybook.whattoon.BottomActivity;
 import com.example.yeeybook.whattoon.CustomAdapter;
+import com.example.yeeybook.whattoon.Frag_Favorite;
 import com.example.yeeybook.whattoon.ItemObject;
 import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.Spinner_Frag1;
+import com.example.yeeybook.whattoon.WebtoonProfileActivity;
 import com.example.yeeybook.whattoon.WebtoonSample;
 
 import java.io.BufferedReader;
@@ -27,9 +34,8 @@ import java.util.List;
 
 public class Tab_Frag2 extends Fragment {
     private View view;
-
     private GridView gv;
-
+    private ArrayList<Integer> IdList = new ArrayList<Integer>();
 
     //프래그먼트 상태 저장
     public static Tab_Frag2 newInstance() {
@@ -51,15 +57,14 @@ public class Tab_Frag2 extends Fragment {
         List<ItemObject> allItems = getAllItemObject();
         CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
         //adapter
-        //gv.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,rankwebtoon));
         gv.setAdapter(customAdapter);
         //Item clicks
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getActivity(),rankwebtoon[i], Toast.LENGTH_SHORT).show();
-                //클릭했을때
-                Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
+                startActivity(a);
             }
         });
 
@@ -92,11 +97,12 @@ public class Tab_Frag2 extends Fragment {
                 //read the data
                 WebtoonSample sample = new WebtoonSample();
                 sample.setId(Integer.parseInt(tokens[0]));
+
                 sample.setTitle(tokens[1]);
                 sample.setAuthor(tokens[2]);
                 webtoonSamples.add(sample);
                 items.add(new ItemObject(sample.getTitle(),sample.getId()));
-//                items.add(new ItemObject(sample.getTitle(),sample.getThumbnail()));
+                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
                 Log.d("MyActivity","Just created: "+sample);
 
             }
@@ -105,9 +111,6 @@ public class Tab_Frag2 extends Fragment {
             Log.v("MyActivity", "Error reading data file on line" + line, e);
             e.printStackTrace();
         }
-
-
-
 
     }
 
