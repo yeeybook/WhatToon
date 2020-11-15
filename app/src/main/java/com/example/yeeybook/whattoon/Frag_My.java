@@ -60,7 +60,7 @@ public class Frag_My extends Fragment {
 
     private View view, ResultLine1, ResultLine2, ResultLine3, ResultLine4, ResultLine5;
     private MyAPI myAPI;
-    private final String BASE_URL = "https://af1292babd70.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
+    private final String BASE_URL = "https://a02a117a05c7.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
     private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;

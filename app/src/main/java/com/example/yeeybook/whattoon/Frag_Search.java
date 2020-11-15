@@ -92,6 +92,7 @@ public class Frag_Search extends Fragment {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
+
                     return false;
                 }
 
@@ -102,18 +103,17 @@ public class Frag_Search extends Fragment {
                 }
             });
         }
+
     }
 
     private void search(String str){
 
         ArrayList<Search_Webtoon> myList = new ArrayList<>();
         for(Search_Webtoon object : list){
-            if(object.getTitle().toLowerCase().contains(str.toLowerCase())){
+            if((object.getTitle().toLowerCase().contains(str.toLowerCase()))||(object.getAuthor().toLowerCase().contains(str.toLowerCase()))){
                 myList.add(object);
             }
-           if(object.getAuthor().toLowerCase().contains(str.toLowerCase())){
-                myList.add(object);
-            }
+
         }
         SearchAdapter searchAdapter = new SearchAdapter(myList);
         recyclerView.setAdapter(searchAdapter);

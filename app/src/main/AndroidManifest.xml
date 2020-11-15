@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".WebtoonProfileActivity"></activity>
-        <activity android:name=".Frag_Rated" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Rating.RatingActivity1" />
         <activity android:name=".Rating.RatingActivity2" />
         <activity android:name=".Rating.RatingActivity3" />
@@ -31,6 +32,7 @@
         <activity android:name=".JoinActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".BottomActivity" />
+
     </application>
 
 </manifest>
