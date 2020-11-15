@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1010746648589",
+    "firebase_url": "https://whattoon-c9397.firebaseio.com",
+    "project_id": "whattoon-c9397",
+    "storage_bucket": "whattoon-c9397.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010746648589:android:751956dcd5e78c30f34d44",
+        "android_client_info": {
+          "package_name": "com.example.yeeybook.whattoon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010746648589-ckj9u8amllmrle2rj6rermbcb3obc0b1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeeybook.whattoon",
+            "certificate_hash": "8ca29bd2c0da1d28bde8341e8b30bc78f7be0946"
+          }
+        },
+        {
+          "client_id": "1010746648589-2ju0dfd78rmfif0rifeliau7v4p7m84g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeeybook.whattoon",
+            "certificate_hash": "fb6dd213fa7d75d22478204db88c8f6ae9f9a9a6"
+          }
+        },
+        {
+          "client_id": "1010746648589-9578kerht82s5gos3h78n3gchmqnmsbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdf7Z3cX5FeJVK4fXhy6nes400nDfPUSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010746648589-9578kerht82s5gos3h78n3gchmqnmsbv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
