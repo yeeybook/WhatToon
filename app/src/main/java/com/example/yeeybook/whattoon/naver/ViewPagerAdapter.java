@@ -5,16 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.yeeybook.whattoon.naver.Tab_Frag1;
-import com.example.yeeybook.whattoon.naver.Tab_Frag2;
-import com.example.yeeybook.whattoon.naver.Tab_Frag3;
-import com.example.yeeybook.whattoon.naver.Tab_Frag4;
-import com.example.yeeybook.whattoon.naver.Tab_Frag5;
-import com.example.yeeybook.whattoon.naver.Tab_Frag6;
-import com.example.yeeybook.whattoon.naver.Tab_Frag7;
-import com.example.yeeybook.whattoon.naver.Tab_Frag8;
-import com.example.yeeybook.whattoon.naver.Tab_Frag9;
-
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
 

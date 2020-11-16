@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +18,12 @@ import com.example.yeeybook.whattoon.ItemObject;
 import com.example.yeeybook.whattoon.R;
 import com.example.yeeybook.whattoon.WebtoonProfileActivity;
 import com.example.yeeybook.whattoon.WebtoonSample;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +32,8 @@ public class Tab_Frag11 extends Fragment {
     private View view;
     private GridView gv;
     private ArrayList<Integer> IdList = new ArrayList<Integer>();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     //프래그먼트 상태 저장
     public static Tab_Frag11 newInstance() {
@@ -71,6 +73,35 @@ public class Tab_Frag11 extends Fragment {
     private List<WebtoonSample> webtoonSamples= new ArrayList<>();
     private List<ItemObject> items= new ArrayList<>();
 
+    public void readWebtoonData(){
+        databaseReference.child("Webtoons").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                WebtoonSample sample = new WebtoonSample();
+
+                for(DataSnapshot snapshot: datasnapshot.getChildren()){
+                    if(snapshot.child("webtoonId").getValue(int.class)>372 && snapshot.child("favorite").getValue(int.class)>0){
+                        sample.setId(snapshot.child("webtoonId").getValue(int.class));
+                        sample.setTitle(snapshot.child("title").getValue(String.class));
+                        sample.setAuthor(snapshot.child("author").getValue(String.class));
+                        webtoonSamples.add(sample);
+                        Log.d("Tab11","샘플"+sample);
+                        items.add(new ItemObject(sample.getTitle(),sample.getId()));
+                        IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    /*
     private void readWebtoonData() {
         InputStream is;
 
@@ -109,6 +140,8 @@ public class Tab_Frag11 extends Fragment {
             e.printStackTrace();
         }
     }
+
+     */
 
     private List<ItemObject> getAllItemObject(){
         ItemObject itemObject=null;

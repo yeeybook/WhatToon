@@ -1,7 +1,7 @@
 package com.example.yeeybook.whattoon.naver;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.yeeybook.whattoon.BottomActivity;
 import com.example.yeeybook.whattoon.CustomAdapter;
 import com.example.yeeybook.whattoon.ItemObject;
 import com.example.yeeybook.whattoon.R;
+import com.example.yeeybook.whattoon.WebtoonProfileActivity;
 import com.example.yeeybook.whattoon.WebtoonSample;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class Tab_Frag1 extends Fragment {
     private View view;
     private GridView gv;
     private ArrayList<Integer> IdList = new ArrayList<Integer>();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     //프래그먼트 상태 저장
     public static Tab_Frag1 newInstance() {
@@ -61,6 +64,9 @@ public class Tab_Frag1 extends Fragment {
 
                 //클릭했을때
                 Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
+                startActivity(a);
 
             }
         });
@@ -68,46 +74,76 @@ public class Tab_Frag1 extends Fragment {
         return view;
 
     }
+
     private List<WebtoonSample> webtoonSamples= new ArrayList<>();
     private List<ItemObject> items= new ArrayList<>();
 
-    private void readWebtoonData() {
-        InputStream is;
 
-        is = getResources().openRawResource(R.raw.naver_prefer);
-
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
-
-        String line="";
-
-
-        try {
-            //step over headers
-            reader.readLine();
-            int i=0;
-            while((line = reader.readLine())!=null){
-                Log.d("Myactivity","Line: "+line);
-                //split by ','
-                String[] tokens = line.split(",");
-
-                //read the data
+    public void readWebtoonData(){
+        databaseReference.child("Webtoons").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 WebtoonSample sample = new WebtoonSample();
-                sample.setId(Integer.parseInt(tokens[0]));
-                sample.setTitle(tokens[1]);
-                sample.setAuthor(tokens[2]);
-                webtoonSamples.add(sample);
-                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
-                Log.d("MyActivity","Just created: "+sample);
+
+                for(DataSnapshot snapshot: datasnapshot.getChildren()){
+                    if(373>snapshot.child("webtoonId").getValue(int.class) && snapshot.child("favorite").getValue(int.class)>0){
+                        sample.setId(snapshot.child("webtoonId").getValue(int.class));
+                        sample.setTitle(snapshot.child("title").getValue(String.class));
+                        sample.setAuthor(snapshot.child("author").getValue(String.class));
+                        webtoonSamples.add(sample);
+                        items.add(new ItemObject(sample.getTitle(),sample.getId()));
+                        IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
+                    }
+
+                }
 
             }
-        }
-        catch (Exception e){
-            Log.v("MyActivity", "Error reading data file on line" + line, e);
-            e.printStackTrace();
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
+//
+//    private void readWebtoonData() {
+//        InputStream is;
+//
+//        is = getResources().openRawResource(R.raw.naver_prefer);
+//
+//        BufferedReader reader = new BufferedReader(
+//                new InputStreamReader(is, Charset.forName("UTF-8"))
+//        );
+//
+//        String line="";
+//
+//
+//        try {
+//            //step over headers
+//            reader.readLine();
+//            int i=0;
+//            while((line = reader.readLine())!=null){
+//                Log.d("Myactivity","Line: "+line);
+//                //split by ','
+//                String[] tokens = line.split(",");
+//
+//                //read the data
+//                WebtoonSample sample = new WebtoonSample();
+//                sample.setId(Integer.parseInt(tokens[0]));
+//                sample.setTitle(tokens[1]);
+//                sample.setAuthor(tokens[2]);
+//                webtoonSamples.add(sample);
+//                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
+//                Log.d("MyActivity","Just created: "+sample);
+//
+//            }
+//        }
+//        catch (Exception e){
+//            Log.v("MyActivity", "Error reading data file on line" + line, e);
+//            e.printStackTrace();
+//        }
+//    }
 
     private List<ItemObject> getAllItemObject(){
         ItemObject itemObject=null;
