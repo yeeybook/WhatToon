@@ -61,13 +61,11 @@ public class Tab_Frag1 extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 //클릭했을때
                 Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
                 Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
                 a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
                 startActivity(a);
-
             }
         });
 

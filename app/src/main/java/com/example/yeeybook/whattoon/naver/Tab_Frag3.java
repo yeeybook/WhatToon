@@ -37,7 +37,7 @@ public class Tab_Frag3 extends Fragment {
     public static Tab_Frag3 newInstance() {
 
         Tab_Frag3 tab_frag3=new Tab_Frag3();
-        return tab_frag3    ;
+        return tab_frag3;
     }
 
     @Nullable

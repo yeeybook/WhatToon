@@ -84,7 +84,6 @@ public class Tab_Frag2 extends Fragment {
 
         String line="";
 
-
         try {
             //step over headers
             reader.readLine();

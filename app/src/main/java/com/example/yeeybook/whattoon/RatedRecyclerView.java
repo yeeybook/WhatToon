@@ -1,5 +1,6 @@
 package com.example.yeeybook.whattoon;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,18 @@ class RatedAdapter extends RecyclerView.Adapter<RatedViewHolder> {
 
     @Override
     public void onBindViewHolder(RatedViewHolder holder, int position) {
-        RatedData data = ratedData.get(position);
+        final RatedData data = ratedData.get(position);
         holder.RatedImg.setImageResource(holder.itemView.getContext().getResources().getIdentifier("img"+data.getImgId(), "drawable", holder.itemView.getContext().getPackageName()));
         holder.RatedTitleTv.setText(data.getName());
         holder.RatedValTv.setText("★ "+data.getRateVal());
+        holder.mView.setOnClickListener(new View.OnClickListener() { // 작품 누르면 프로필 페이지로 넘어가게
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(view.getContext(), WebtoonProfileActivity.class);
+                a.putExtra("id", data.getImgId()); // 페이지 넘길 때 id값도 전달
+                view.getContext().startActivity(a);
+            }
+        });
     }
 
     @Override
@@ -47,9 +56,11 @@ class RatedAdapter extends RecyclerView.Adapter<RatedViewHolder> {
 class RatedViewHolder extends RecyclerView.ViewHolder { // ViewHolder를 상속받는 클래스
     public ImageView RatedImg;
     public TextView RatedTitleTv, RatedValTv;
+    public final View mView; // 클릭 이벤트 위해
 
     public RatedViewHolder(View itemView){
         super(itemView);
+        mView = itemView; // 클릭 이벤트 위해
         RatedImg = itemView.findViewById(R.id.RatedImg);
         RatedTitleTv = itemView.findViewById(R.id.RatedTitleTv);
         RatedValTv = itemView.findViewById(R.id.RatedValTv);

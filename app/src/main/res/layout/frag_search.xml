@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:queryHint="제목 또는 작가명을 입력하세요."
-        >
+        android:queryHint="제목 또는 작가명을 입력하세요.">
 
     </SearchView>
 
