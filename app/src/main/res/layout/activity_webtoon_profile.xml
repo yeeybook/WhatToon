@@ -6,45 +6,148 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".WebtoonProfileActivity">
+
+    <include
+        layout="@layout/appbar"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2번화면입니다."
-            android:textSize="40sp"
-            android:id="@+id/test"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+       >
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:id="@+id/Profileimg"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Profiletitle"
+                android:textSize="18dp"
+                android:textColor="#000000"
+
+                />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="좋아요 "
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_marginTop="5dp"
+                android:id="@+id/Profileauthor"
+                android:textSize="13dp"
+                android:textColor="#999999"
 
-            <ToggleButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/button_favorite"
-                android:checked="false"
-                android:text=""
-                android:textOff=""
-                android:textOn=""
-                android:id="@+id/favoriteBtn"/>
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Profilegenre"
+                android:textSize="13dp"
+                android:textColor="#999999"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Profileday"
+                android:textSize="13dp"
+                android:textColor="#999999"
+
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+              <ToggleButton
+                  android:layout_width="40dp"
+                 android:layout_height="40dp"
+                 android:layout_marginTop="1dp"
+                 android:background="@drawable/button_favorite"
+                 android:checked="false"
+                 android:text=""
+                 android:textOff=""
+                 android:textOn=""
+                  android:id="@+id/favoriteBtn"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:id="@+id/Profilefavorite"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorWhatToon"
+                    android:text ="100"
+
+                    />
+
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Profiledesc"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="15dp"
+            android:textColor="#999999"
+
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="웹툰 보러가기"
+        android:id="@+id/Profileurl"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
         <RatingBar
             android:theme="@style/RatingBar"
             android:layout_width="wrap_content"
@@ -61,4 +164,7 @@
                 android:textSize="16dp"
                 android:id="@+id/myRateTv"/>
     </LinearLayout>
+
+
+
 </LinearLayout>

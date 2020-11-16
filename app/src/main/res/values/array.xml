@@ -3,6 +3,5 @@
     <string-array name="test">
         <item>naver</item>
         <item>daum</item>
-        <item>기타등등</item>
     </string-array>
 </resources>

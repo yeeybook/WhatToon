@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WebtoonProfileActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -30,6 +29,8 @@
         <activity android:name=".JoinActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".BottomActivity" />
+        <activity android:name=".WebtoonProfileActivity"></activity>
+
     </application>
 
 </manifest>
