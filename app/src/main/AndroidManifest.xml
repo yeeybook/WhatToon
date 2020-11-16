@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".WebtoonProfileActivity"></activity>
-        <activity android:name=".Frag_Rated" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
