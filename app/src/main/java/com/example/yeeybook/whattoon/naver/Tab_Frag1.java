@@ -24,7 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Tab_Frag1 extends Fragment {
@@ -34,6 +40,8 @@ public class Tab_Frag1 extends Fragment {
     private ArrayList<Integer> IdList = new ArrayList<Integer>();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
+    private List<WebtoonSample> webtoonSamples= new ArrayList<>();
+    private List<ItemObject> items= new ArrayList<>();
 
     //프래그먼트 상태 저장
     public static Tab_Frag1 newInstance() {
@@ -47,7 +55,64 @@ public class Tab_Frag1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_frag1,container,false);
 
-        readWebtoonData();
+        //readWebtoons()
+        databaseReference.child("Webtoons").addValueEventListener(new ValueEventListener() {
+
+            //웹툰 인기순 정렬하기위한 jsonarray
+            JSONArray WebSort = new JSONArray();
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for(DataSnapshot snapshot: datasnapshot.getChildren()){
+                    if(373>snapshot.child("webtoonId").getValue(int.class) && snapshot.child("favorite").getValue(int.class)>0){
+
+                        JSONObject Websample = new JSONObject();
+                        try {
+                            Websample.put("id",snapshot.child("webtoonId").getValue(int.class));
+                            Websample.put("title",snapshot.child("title").getValue(String.class));
+                            Websample.put("author",snapshot.child("author").getValue(String.class));
+                            Websample.put("favorite",snapshot.child("favorite").getValue(int.class));
+                            WebSort.put(Websample);
+                            //Log.d("Tab1","jsonWebSort::"+WebSort);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                try {
+
+                    WebSort = sortJsonArray(WebSort);
+
+                    //JsonArray --> JsonObject
+                    WebtoonSample sample = new WebtoonSample();
+                    int list_cnt = WebSort.length();
+                    String[] getDescription = new String[list_cnt]; //decription 저장용
+                    String[] getLink = new String[list_cnt]; //link 저장용
+                    String[] getImageUrl = new String[list_cnt]; //imageUrl 저장용
+
+                    for(int i=list_cnt-1;i>=0;i--){
+                        JSONObject jsonObject = WebSort.getJSONObject(i);
+                        sample.setId(jsonObject.getInt("id"));
+                        sample.setTitle(jsonObject.getString("title"));
+                        sample.setAuthor(jsonObject.getString("author"));
+
+                        webtoonSamples.add(sample);
+                        items.add(new ItemObject(sample.getTitle(),sample.getId()));
+                        IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //gridview reference
 
@@ -73,10 +138,37 @@ public class Tab_Frag1 extends Fragment {
 
     }
 
-    private List<WebtoonSample> webtoonSamples= new ArrayList<>();
-    private List<ItemObject> items= new ArrayList<>();
 
+    //인기순 정렬
+    public static JSONArray sortJsonArray(JSONArray array) throws JSONException {
+        List<JSONObject> jsons = new ArrayList<JSONObject>();
+        for (int i = 0; i < array.length(); i++) {
+            jsons.add(array.getJSONObject(i));
+        }
+        Collections.sort(jsons, new Comparator<JSONObject>() {
+            @Override
+            public int compare(JSONObject lhs, JSONObject rhs) {
+                String lid = null;
+                try {
+                    lid = lhs.getString("favorite");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String rid = null;
+                try {
+                    rid = rhs.getString("favorite");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // Here you could parse string id to integer and then compare.
+                return lid.compareTo(rid);
+            }
+        });
 
+        return new JSONArray(jsons);
+    }
+
+/*
     public void readWebtoonData(){
         databaseReference.child("Webtoons").addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,6 +186,7 @@ public class Tab_Frag1 extends Fragment {
                     }
 
                 }
+                Log.d("Tab1","샘플"+WJArr);
 
             }
 
@@ -104,44 +197,7 @@ public class Tab_Frag1 extends Fragment {
         });
     }
 
-//
-//    private void readWebtoonData() {
-//        InputStream is;
-//
-//        is = getResources().openRawResource(R.raw.naver_prefer);
-//
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(is, Charset.forName("UTF-8"))
-//        );
-//
-//        String line="";
-//
-//
-//        try {
-//            //step over headers
-//            reader.readLine();
-//            int i=0;
-//            while((line = reader.readLine())!=null){
-//                Log.d("Myactivity","Line: "+line);
-//                //split by ','
-//                String[] tokens = line.split(",");
-//
-//                //read the data
-//                WebtoonSample sample = new WebtoonSample();
-//                sample.setId(Integer.parseInt(tokens[0]));
-//                sample.setTitle(tokens[1]);
-//                sample.setAuthor(tokens[2]);
-//                webtoonSamples.add(sample);
-//                IdList.add(sample.getId()); // 그리드뷰로 나타내고 있는 아이디를 리스트에 저장
-//                Log.d("MyActivity","Just created: "+sample);
-//
-//            }
-//        }
-//        catch (Exception e){
-//            Log.v("MyActivity", "Error reading data file on line" + line, e);
-//            e.printStackTrace();
-//        }
-//    }
+ */
 
     private List<ItemObject> getAllItemObject(){
         ItemObject itemObject=null;
