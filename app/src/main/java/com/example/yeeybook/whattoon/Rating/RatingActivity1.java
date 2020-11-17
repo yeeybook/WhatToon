@@ -63,61 +63,79 @@ public class RatingActivity1 extends AppCompatActivity {
         star1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[0]);
-                hashMap.put("title", titleList[0]);
-                hashMap.put("rate", v); //별점 값 받아옴
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[0])).updateChildren(hashMap);
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[0])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[0]);
+                    hashMap.put("title", titleList[0]);
+                    hashMap.put("rate", v); //별점 값 받아옴
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[0])).updateChildren(hashMap);
+                }
             }
         });
         star2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[1]);
-                hashMap.put("title", titleList[1]);
-                hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[1])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[1])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[1]);
+                    hashMap.put("title", titleList[1]);
+                    hashMap.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[1])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                }
             }
         });
         star3.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[2]);
-                hashMap.put("title", titleList[2]);
-                hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[2])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[2])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[2]);
+                    hashMap.put("title", titleList[2]);
+                    hashMap.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[2])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                }
             }
         });
         star4.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[3]);
-                hashMap.put("title", titleList[3]);
-                hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[3])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[3])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[3]);
+                    hashMap.put("title", titleList[3]);
+                    hashMap.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[3])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                }
             }
         });
         star5.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[4]);
-                hashMap.put("title", titleList[4]);
-                hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[4])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[4])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[4]);
+                    hashMap.put("title", titleList[4]);
+                    hashMap.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[4])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                }
             }
         });
         star6.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("webtoonId", webtoonList[5]);
-                hashMap.put("title", titleList[5]);
-                hashMap.put("rate", v);
-                FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[5])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                if(v == 0) FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[5])).removeValue(); // 0점은 평가 안 한거니까
+                else{
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonList[5]);
+                    hashMap.put("title", titleList[5]);
+                    hashMap.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Ratings").child(String.valueOf(webtoonList[5])).updateChildren(hashMap); // Ratings 안에 id안에 값 넣음
+                }
             }
         });
     }

@@ -10,7 +10,6 @@
     <include
         layout="@layout/appbar"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,28 +30,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Profiletitle"
-                android:textSize="18dp"
-                android:textColor="#000000"
-
-                />
+                android:textSize="19dp"
+                android:textColor="#000000" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:id="@+id/Profileauthor"
-                android:textSize="13dp"
+                android:textSize="14dp"
                 android:textColor="#999999"
-
                 />
 
             <TextView
@@ -60,87 +54,75 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:id="@+id/Profilegenre"
-                android:textSize="13dp"
-                android:textColor="#999999"
-
-                />
+                android:textSize="14dp"
+                android:textColor="#999999" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:id="@+id/Profileday"
-                android:textSize="13dp"
-                android:textColor="#999999"
-
-                />
+                android:textSize="14dp"
+                android:textColor="#999999" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
-              <ToggleButton
-                  android:layout_width="40dp"
-                 android:layout_height="40dp"
-                 android:layout_marginTop="1dp"
-                 android:background="@drawable/button_favorite"
-                 android:checked="false"
-                 android:text=""
-                 android:textOff=""
-                 android:textOn=""
-                  android:id="@+id/favoriteBtn"/>
+                <ToggleButton
+                    android:id="@+id/favoriteBtn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/button_favorite"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="1dp"
                     android:id="@+id/Profilefavorite"
-                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
                     android:textColor="@color/colorWhatToon"
-                    android:text ="100"
-
-                    />
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
 
             </LinearLayout>
 
         </LinearLayout>
 
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Profiledesc"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textSize="15dp"
-            android:textColor="#999999"
-
-            />
-
+            android:textSize="16dp"
+            android:textColor="#999999" />
 
     </LinearLayout>
 
     <Button
+        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:text="웹툰 보러가기"
         android:id="@+id/Profileurl"
-        />
+        android:background="#ced4da" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -161,10 +143,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="아직 평가를 하지 않았어요"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:id="@+id/myRateTv"/>
     </LinearLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_bar"/>
+</LinearLayout>
 
 
 </LinearLayout>
