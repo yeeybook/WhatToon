@@ -55,7 +55,7 @@ public class Tab_Frag1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_frag1,container,false);
 
-        //readWebtoons()
+        //readWebtoons();
         databaseReference.child("Webtoons").addValueEventListener(new ValueEventListener() {
 
             //웹툰 인기순 정렬하기위한 jsonarray
@@ -80,9 +80,7 @@ public class Tab_Frag1 extends Fragment {
                     }
                 }
                 try {
-
                     WebSort = sortJsonArray(WebSort);
-
                     //JsonArray --> JsonObject
                     WebtoonSample sample = new WebtoonSample();
                     int list_cnt = WebSort.length();
@@ -106,31 +104,29 @@ public class Tab_Frag1 extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                //gridview reference
+
+                gv=(GridView)view.findViewById(R.id.gridview1);
+
+                List<ItemObject> allItems = getAllItemObject();
+                CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
+                //adapter
+                gv.setAdapter(customAdapter);
+                //Item clicks
+                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        //클릭했을때
+                        Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                        a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
+                        startActivity(a);
+                    }
+                });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        //gridview reference
-
-        gv=(GridView)view.findViewById(R.id.gridview1);
-
-        List<ItemObject> allItems = getAllItemObject();
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
-        //adapter
-        gv.setAdapter(customAdapter);
-        //Item clicks
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //클릭했을때
-                Toast.makeText(getActivity(),"position: "+i,Toast.LENGTH_SHORT).show();
-                Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
-                a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
-                startActivity(a);
             }
         });
 

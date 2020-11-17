@@ -102,29 +102,28 @@ public class Tab_Frag11 extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                //gridview reference
+
+                gv=(GridView)view.findViewById(R.id.gridview1);
+
+                List<ItemObject> allItems = getAllItemObject();
+                CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
+                //adapter
+                gv.setAdapter(customAdapter);
+                //Item clicks
+                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                        a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
+                        startActivity(a);
+                    }
+                });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        //gridview reference
-
-        gv=(GridView)view.findViewById(R.id.gridview1);
-
-        List<ItemObject> allItems = getAllItemObject();
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
-        //adapter
-        gv.setAdapter(customAdapter);
-        //Item clicks
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
-                a.putExtra("id", IdList.get(i)); // 페이지 넘길 때 id값도 전달
-                startActivity(a);
             }
         });
 

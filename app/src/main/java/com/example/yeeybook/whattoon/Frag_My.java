@@ -62,7 +62,7 @@ public class Frag_My extends Fragment {
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
     private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;
-    private TextView ResultTv0, ResultTv1, ResultTv2, ResultTv3, ResultTv4, ResultTv5, LogoutTv, nameProfileTv, showRatedTv;
+    private TextView ResultTv0, ResultTv1, ResultTv2, ResultTv3, ResultTv4, ResultTv5, LogoutTv, nameProfileTv, showRatedTv, countRatedTv;
     private ImageView ResultImg1, ResultImg2, ResultImg3, ResultImg4, ResultImg5, imgProfile, imgProfileDialog;
     private LinearLayout RecommenderLayout, ResultLayout, ResultLl1, ResultLl2, ResultLl3, ResultLl4, ResultLl5;
     private FirebaseAuth firebaseAuth;
@@ -89,7 +89,7 @@ public class Frag_My extends Fragment {
         ResultLl1 = view.findViewById(R.id.ResultLl1);ResultLl2 = view.findViewById(R.id.ResultLl2);ResultLl3 = view.findViewById(R.id.ResultLl3);ResultLl4 = view.findViewById(R.id.ResultLl4);ResultLl5 = view.findViewById(R.id.ResultLl5);
         ResultLine1 = view.findViewById(R.id.ResultLine1);ResultLine2 = view.findViewById(R.id.ResultLine2);ResultLine3 = view.findViewById(R.id.ResultLine3);ResultLine4 = view.findViewById(R.id.ResultLine4);ResultLine5 = view.findViewById(R.id.ResultLine5);
         ResultTv0 = view.findViewById(R.id.ResultTv0);ResultTv1 = view.findViewById(R.id.ResultTv1);ResultTv2 = view.findViewById(R.id.ResultTv2);ResultTv3 = view.findViewById(R.id.ResultTv3);ResultTv4 = view.findViewById(R.id.ResultTv4);ResultTv5 = view.findViewById(R.id.ResultTv5);
-        LogoutTv = view.findViewById(R.id.LogoutTv);nameProfileTv = view.findViewById(R.id.nameProfileTv);showRatedTv = view.findViewById(R.id.showRatedTv);
+        LogoutTv = view.findViewById(R.id.LogoutTv);nameProfileTv = view.findViewById(R.id.nameProfileTv);showRatedTv = view.findViewById(R.id.showRatedTv);countRatedTv = view.findViewById(R.id.countRatedTv);
         ResultImg1 = view.findViewById(R.id.ResultImg1);ResultImg2 = view.findViewById(R.id.ResultImg2);ResultImg3 = view.findViewById(R.id.ResultImg3);ResultImg4 = view.findViewById(R.id.ResultImg4);ResultImg5 = view.findViewById(R.id.ResultImg5);imgProfile = view.findViewById(R.id.imgProfile);
         imgProfile = view.findViewById(R.id.imgProfile);
 
@@ -122,24 +122,26 @@ public class Frag_My extends Fragment {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()){
                     UserModel userModel = snapshot.getValue(UserModel.class);
                     if(currentUid.equals(userModel.uid)){ // 현재 로그인 중인 사용자의 uid가 일치할 때
-                        Glide.with(getContext()).load(userModel.profileImgUrl).apply(new RequestOptions().circleCrop()).into(imgProfile); // 이미지 가져와서 띄우고
+                        if(getActivity() == null) return; // getActivity에 null값이 들어가 종료 되는 현상 막기 위해
+                        Glide.with(getActivity()).load(userModel.profileImgUrl).apply(new RequestOptions().circleCrop()).into(imgProfile); // 이미지 가져와서 띄우고
                         nameProfileTv.setText(userModel.name); // 이름 가져와서 띄움
 
                         FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").addValueEventListener(new ValueEventListener() { // 평가한 항목들 가져오기(사진만 미리보기)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                int Max = 10; // 최대 10개까지만 보여줄거임
+                                int Max = 10, cnt = 0; // 최대 10개까지만 보여줄거임, 평가한 개수 카운트
                                 ArrayList<RatedPrevData> data = new ArrayList<>();
                              for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                                 RatingModel ratingModel = snapshot1.getValue(RatingModel.class);
-                                 if(ratingModel.rate > 0) { // 평가한 데이터만 보여줌
+                                 if(Max>0){
+                                     RatingModel ratingModel = snapshot1.getValue(RatingModel.class);
                                      data.add(new RatedPrevData(ratingModel.webtoonId));
                                      mAdapter.setData(data);
                                      mRatedRecyclerView.setAdapter(mAdapter);
                                      Max--;
                                  }
-                                 if(Max==0) break;
+                                 cnt++;
                              }
+                                countRatedTv.setText("("+cnt+")"); // 평가 개수 보여줌
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) { }

@@ -29,8 +29,6 @@ public class WebtoonSample {
         this.author =day;
     }
 
-
-
     @Override
     public String toString() {
         return "WebtoonSample{" +
