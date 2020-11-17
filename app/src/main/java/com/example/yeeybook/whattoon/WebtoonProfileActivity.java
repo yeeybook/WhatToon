@@ -232,35 +232,31 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                     RatingModel ratingModel = snapshot.getValue(RatingModel.class);
                     if (ratingModel.webtoonId == webtoonId && ratingModel.rate > 0) { // 평가한 데이터만 가져올거다
                         star.setRating(ratingModel.rate);
-                        myRateTv.setText("★" + ratingModel.rate);
+                        myRateTv.setText("★ " + ratingModel.rate);
                         myRateTv.setTextColor(Color.parseColor("#1F7AE2"));
-
-                        FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Favorites").addValueEventListener(new ValueEventListener() { // 하트 미리 채워넣는 코드
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                                    FavoriteModel favoriteModel = snapshot.getValue(FavoriteModel.class);
-                                    if (favoriteModel.webtoonId == webtoonId) { // 좋아요 한 작품이면
-                                        favoriteBtn.setChecked(true);
-                                        break;
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
-
                         break;
                     }
                 }
+                FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Favorites").addValueEventListener(new ValueEventListener() { // 하트 미리 채워넣는 코드
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
+                        for (DataSnapshot snapshot : datasnapshot1.getChildren()) {
+                            FavoriteModel favoriteModel = snapshot.getValue(FavoriteModel.class);
+                            if (favoriteModel.webtoonId == webtoonId) { // 좋아요 한 작품이면
+                                favoriteBtn.setChecked(true);
+                                break;
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
 
         star.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() { // 평점 남길 때마다 발생하는 이벤트
             @Override

@@ -109,10 +109,14 @@ public class Tab_Frag1 extends Fragment {
                 gv=(GridView)view.findViewById(R.id.gridview1);
 
                 List<ItemObject> allItems = getAllItemObject();
-                CustomAdapter customAdapter = new CustomAdapter(getActivity(),allItems);
-                //adapter
-                gv.setAdapter(customAdapter);
-                //Item clicks
+
+                if(getActivity()!=null) {
+                    CustomAdapter customAdapter = new CustomAdapter(getActivity(), allItems);
+                    //adapter
+
+                    gv.setAdapter(customAdapter);
+                    //Item clicks
+                }
                 gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
