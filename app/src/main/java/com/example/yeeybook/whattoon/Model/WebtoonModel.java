@@ -8,6 +8,7 @@ public class WebtoonModel {
     public String genre;
     public String title;
     public String url;
+    public String keyword;
     public int webtoonId;
     public int favorite;
 
@@ -15,7 +16,7 @@ public class WebtoonModel {
 
     }
 
-    public WebtoonModel(String author, String day, String platform, String story, String title, int webtoonId, int favorite,String genre,String url) {
+    public WebtoonModel(String author, String day, String platform, String story, String title, int webtoonId, int favorite,String genre,String url, String keyword) {
         this.author = author;
         this.day = day;
         this.platform = platform;
@@ -25,6 +26,7 @@ public class WebtoonModel {
         this.favorite = favorite;
         this.genre = genre;
         this.url = url;
+        this.keyword = keyword;
     }
 
     public String getAuthor() {
@@ -97,5 +99,13 @@ public class WebtoonModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

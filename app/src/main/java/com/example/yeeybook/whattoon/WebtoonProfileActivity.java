@@ -45,6 +45,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
     private Button Profileurl;
 
     private int webtoonId;
+    private String webtoonTitle, webtoonPlatform;
 
     private Toolbar toolbar;
 
@@ -122,6 +123,9 @@ public class WebtoonProfileActivity extends AppCompatActivity {
 
                 //hashMap.clear();
 
+                webtoonTitle = webtoonModel.title;
+                webtoonPlatform = webtoonModel.platform;
+
                 Profiletitle.setText(hashMap.get("title"));
                 Profileauthor.setText(hashMap.get("author"));
                 Profileday.setText(hashMap.get("day"));
@@ -178,8 +182,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 favoriteBtn.startAnimation(scaleAnimation);
                 if(favoriteBtn.isChecked()){ // 좋아요 누르면 Webtoons의 favorite에 +1된다
-
-                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).addListenerForSingleValueEvent(new ValueEventListener() { // 타이틀 찾으려고 임시로 넣어둠
+                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).addListenerForSingleValueEvent(new ValueEventListener() { // favorite 값 찾기 위해
                         @Override
                         public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                             WebtoonModel webtoonModel = datasnapshot.getValue(WebtoonModel.class);
@@ -191,8 +194,8 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                             hashMap.clear();
 
                             hashMap.put("webtoonId", webtoonId);
-                            hashMap.put("title", webtoonModel.title);
-                            hashMap.put("platform", webtoonModel.platform);
+                            hashMap.put("title", webtoonTitle);
+                            hashMap.put("platform", webtoonPlatform);
                             FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Favorites").child(String.valueOf(webtoonId)).updateChildren(hashMap); // User favorite항목에 추가
                         }
 
@@ -204,7 +207,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
 
                 }
                 else{ // 좋아요 해제하면 Webtoons의 favorite에 -1된다
-                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).addListenerForSingleValueEvent(new ValueEventListener() { // Webtoons 값에 -1
+                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).addListenerForSingleValueEvent(new ValueEventListener() { // favorite 값 찾기 위해
                         @Override
                         public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                             WebtoonModel webtoonModel = datasnapshot.getValue(WebtoonModel.class);
@@ -212,7 +215,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
 
                             hashMap.put("favorite", webtoonModel.favorite-1);
 
-                            FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).updateChildren(hashMap);
+                            FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).updateChildren(hashMap); // Webtoons 값에 -1
 
                             FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Favorites").child(String.valueOf(webtoonId)).removeValue(); // User favorite항목에서 지움
                         }
@@ -268,27 +271,15 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                     myRateTv.setTextColor(Color.parseColor("#808080"));
                 }
                 else{
-                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId - 1)).addValueEventListener(new ValueEventListener() { // 타이틀 찾으려고 임시로 넣어둠
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                            WebtoonModel webtoonModel = datasnapshot.getValue(WebtoonModel.class);
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("webtoonId", webtoonId);
-                            hashMap.put("title", webtoonModel.title);
-                            hashMap.put("rate", v); //별점 값 받아옴
-                            star.setRating(v);
-                            myRateTv.setText("★" + v);
-                            myRateTv.setTextColor(Color.parseColor("#1F7AE2"));
-                            FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").child(String.valueOf(webtoonId)).updateChildren(hashMap);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("webtoonId", webtoonId);
+                    hashMap.put("title", webtoonTitle);
+                    hashMap.put("rate", v); //별점 값 받아옴
+                    star.setRating(v);
+                    myRateTv.setText("★" + v);
+                    myRateTv.setTextColor(Color.parseColor("#1F7AE2"));
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").child(String.valueOf(webtoonId)).updateChildren(hashMap);
                 }
-
             }
         });
 

@@ -34,7 +34,6 @@ public class Tab_Frag22 extends Fragment {
 
     //프래그먼트 상태 저장
     public static Tab_Frag22 newInstance() {
-
         Tab_Frag22 tab_frag22 =new Tab_Frag22();
         return tab_frag22;
     }
