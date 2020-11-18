@@ -59,22 +59,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="23dp"
-                    android:text="  내가 평가한 작품 "
+                    android:layout_weight="3.5"
+                    android:text="  내가 평가한 작품"
                     android:textSize="17dp" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="23dp"
+                    android:layout_weight="1"
                     android:text=""
                     android:textSize="17dp"
                     android:id="@+id/countRatedTv"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="23dp"
-                    android:text="                                     >"
+                    android:layout_weight="5"
+                    android:text="> "
                     android:textSize="17dp"
-                    android:id="@+id/showRatedTv" />
+                    android:id="@+id/showRatedTv"
+                    android:gravity="right"/>
             </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

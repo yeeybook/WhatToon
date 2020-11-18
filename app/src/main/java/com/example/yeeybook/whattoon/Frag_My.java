@@ -58,7 +58,7 @@ public class Frag_My extends Fragment {
 
     private View view, ResultLine1, ResultLine2, ResultLine3, ResultLine4, ResultLine5;
     private MyAPI myAPI;
-    private final String BASE_URL = "https://a02a117a05c7.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
+    private final String BASE_URL = "https://4967726fd5e9.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
     private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;
@@ -261,11 +261,52 @@ public class Frag_My extends Fragment {
                                     ResultTv3.setText(valList[2] + "%의 확률로\n" + authorList[2] + " 작가의\n<" + titleList[2] + ">\n-" + platformList[2] + "-");
                                     ResultTv4.setText(valList[3] + "%의 확률로\n" + authorList[3] + " 작가의\n<" + titleList[3] + ">\n-" + platformList[3] + "-");
                                     ResultTv5.setText(valList[4] + "%의 확률로\n" + authorList[4] + " 작가의\n<" + titleList[4] + ">\n-" + platformList[4] + "-");
-                                    ResultImg1.setImageResource(getResources().getIdentifier("img" + idList[0], "drawable", getActivity().getPackageName()));
-                                    ResultImg2.setImageResource(getResources().getIdentifier("img" + idList[1], "drawable", getActivity().getPackageName()));
-                                    ResultImg3.setImageResource(getResources().getIdentifier("img" + idList[2], "drawable", getActivity().getPackageName()));
-                                    ResultImg4.setImageResource(getResources().getIdentifier("img" + idList[3], "drawable", getActivity().getPackageName()));
-                                    ResultImg5.setImageResource(getResources().getIdentifier("img" + idList[4], "drawable", getActivity().getPackageName()));
+                                    if(getActivity() != null) ResultImg1.setImageResource(getResources().getIdentifier("img" + idList[0], "drawable", getActivity().getPackageName()));
+                                    if(getActivity() != null) ResultImg2.setImageResource(getResources().getIdentifier("img" + idList[1], "drawable", getActivity().getPackageName()));
+                                    if(getActivity() != null) ResultImg3.setImageResource(getResources().getIdentifier("img" + idList[2], "drawable", getActivity().getPackageName()));
+                                    if(getActivity() != null) ResultImg4.setImageResource(getResources().getIdentifier("img" + idList[3], "drawable", getActivity().getPackageName()));
+                                    if(getActivity() != null) ResultImg5.setImageResource(getResources().getIdentifier("img" + idList[4], "drawable", getActivity().getPackageName()));
+
+                                    ResultLl1.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                                            a.putExtra("id", Integer.valueOf(idList[0])); // 페이지 넘길 때 id값도 전달
+                                            startActivity(a);
+                                        }
+                                    });
+                                    ResultLl2.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                                            a.putExtra("id", Integer.valueOf(idList[1])); // 페이지 넘길 때 id값도 전달
+                                            startActivity(a);
+                                        }
+                                    });
+                                    ResultLl3.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                                            a.putExtra("id", Integer.valueOf(idList[2])); // 페이지 넘길 때 id값도 전달
+                                            startActivity(a);
+                                        }
+                                    });
+                                    ResultLl4.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                                            a.putExtra("id", Integer.valueOf(idList[3])); // 페이지 넘길 때 id값도 전달
+                                            startActivity(a);
+                                        }
+                                    });
+                                    ResultLl5.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
+                                            a.putExtra("id", Integer.valueOf(idList[4])); // 페이지 넘길 때 id값도 전달
+                                            startActivity(a);
+                                        }
+                                    });
                                 }
 
                                 @Override
