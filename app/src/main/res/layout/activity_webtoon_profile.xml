@@ -12,145 +12,199 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+       >
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:id="@+id/Profileimg"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:id="@+id/Profileimg" />
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Profiletitle"
+                android:textSize="19dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Profileauthor"
+                android:textSize="14dp"
+                android:textColor="#999999"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Profilegenre"
+                android:textSize="14dp"
+                android:textColor="#999999" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/Profileday"
+                android:textSize="14dp"
+                android:textColor="#999999" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ToggleButton
+                    android:id="@+id/favoriteBtn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/button_favorite"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
 
                 <TextView
-                    android:layout_marginTop="15dp"
+                    android:id="@+id/Profilefavorite"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Profiletitle"
-                    android:textSize="19dp"
-                    android:textColor="#000000" />
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textColor="@color/colorWhatToon"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/Profileauthor"
-                    android:textSize="14dp"
-                    android:textColor="#999999"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/Profilegenre"
-                    android:textSize="14dp"
-                    android:textColor="#999999" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/Profileday"
-                    android:textSize="14dp"
-                    android:textColor="#999999" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ToggleButton
-                        android:id="@+id/favoriteBtn"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/button_favorite"
-                        android:checked="false"
-                        android:text=""
-                        android:textOff=""
-                        android:textOn="" />
-
-                    <TextView
-                        android:id="@+id/Profilefavorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:layout_marginLeft="5dp"
-                        android:text=""
-                        android:textColor="@color/colorWhatToon"
-                        android:textSize="20dp"
-                        android:textStyle="bold"/>
-
-
-                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Profiledesc"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textSize="16dp"
-                android:textColor="#999999" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-        <Button
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="웹툰 보러가기"
-            android:textSize="15dp"
-            android:id="@+id/Profileurl"
-            android:background="#ced4da" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:id="@+id/Profiledesc"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="14dp"
+            android:textColor="#999999" />
 
-            <RatingBar
-                android:theme="@style/RatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:max="5"
-                android:rating="0"
-                android:stepSize="0.5"
-                android:id="@+id/star"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="웹툰 보러가기"
+        android:textSize="15dp"
+        android:id="@+id/Profileurl"
+        android:background="#ced4da" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <RatingBar
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:max="5"
+            android:rating="0"
+            android:stepSize="0.5"
+            android:id="@+id/star"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="아직 평가를 하지 않았어요"
                 android:textSize="18dp"
                 android:id="@+id/myRateTv"/>
-        </LinearLayout>
+    </LinearLayout>
+<!--<LinearLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:gravity="bottom">-->
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/bottom_bar"/>-->
+<!--</LinearLayout>-->
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:id="@+id/comment"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/comment"
+            android:id="@+id/textimg"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="댓글"
+            android:textColor="#000000"
+            android:id="@+id/geul"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text=" (3)"
+            android:textColor="#000000"
+            android:id="@+id/num"
+            android:textSize="20dp"
+            />
+
 
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recomment"
+        android:layout_marginLeft="15dp"
+        />
+
 
 </LinearLayout>

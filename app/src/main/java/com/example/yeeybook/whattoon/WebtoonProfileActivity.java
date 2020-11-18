@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,7 +17,9 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -34,7 +37,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
 
 public class WebtoonProfileActivity extends AppCompatActivity {
     private ToggleButton favoriteBtn;
@@ -50,6 +56,11 @@ public class WebtoonProfileActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private DatabaseReference mDatabase;
+
+    ////lv
+    ListView listView;
+    MyAdapter adapter;
+   List<ItemData> dataList;
 
 
     private String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); // 현재 로그인 중인 uid
@@ -282,6 +293,17 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        dataList = new ArrayList<>();
+        listView = (ListView)findViewById(R.id.recomment);
+        dataList.add(new ItemData("yubin",R.drawable.yubin,"재밌어요~",5));
+        dataList.add(new ItemData("yeseo",R.drawable.yeseo,"완전 꿀잼 !",4));
+        dataList.add(new ItemData("sujin",R.drawable.sujin,"제 스타일 아닙니다.",1));
+        //3
+        adapter = new MyAdapter(this,dataList);
+        listView.setAdapter(adapter);
+
+
 
     }
 
