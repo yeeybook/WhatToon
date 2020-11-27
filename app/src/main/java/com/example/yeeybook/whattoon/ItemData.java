@@ -3,11 +3,11 @@ package com.example.yeeybook.whattoon;
 public class ItemData {
 
     private String nn;
-    private int imgid;
+    private String imgid;
     private String desc;
-    private int sn;
+    private float sn;
 
-    public ItemData(String nn, int imgid, String desc, int sn) {
+    public ItemData(String nn, String imgid, String desc, float sn) {
         this.nn = nn;
         this.imgid = imgid;
         this.desc = desc;
@@ -22,11 +22,11 @@ public class ItemData {
         this.nn = nn;
     }
 
-    public int getImgid() {
+    public String getImgid() {
         return imgid;
     }
 
-    public void setImgid(int imgid) {
+    public void setImgid(String imgid) {
         this.imgid = imgid;
     }
 
@@ -38,11 +38,11 @@ public class ItemData {
         this.desc = desc;
     }
 
-    public int getSn() {
+    public float getSn() {
         return sn;
     }
 
-    public void setSn(int sn) {
+    public void setSn(float sn) {
         this.sn = sn;
     }
 }

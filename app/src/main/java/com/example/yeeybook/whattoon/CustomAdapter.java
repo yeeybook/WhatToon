@@ -20,7 +20,7 @@ public class CustomAdapter extends BaseAdapter {
 
     public CustomAdapter(Context context, List<ItemObject> customizedListView){
         this.context = context;
-        layoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (context != null) layoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         listStorage = customizedListView;
     }
 

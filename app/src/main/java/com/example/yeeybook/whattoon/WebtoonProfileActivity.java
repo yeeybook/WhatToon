@@ -1,38 +1,41 @@
 package com.example.yeeybook.whattoon;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ExpandableListView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import java.net.URI;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.yeeybook.whattoon.Model.CommentModel;
 import com.example.yeeybook.whattoon.Model.FavoriteModel;
 import com.example.yeeybook.whattoon.Model.RatingModel;
+import com.example.yeeybook.whattoon.Model.UserModel;
 import com.example.yeeybook.whattoon.Model.WebtoonModel;
-import com.example.yeeybook.whattoon.naver.Tab_Frag2;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -40,28 +43,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 public class WebtoonProfileActivity extends AppCompatActivity {
     private ToggleButton favoriteBtn;
-    private TextView myRateTv;
+    private TextView myRateTv, leaveCommentTv, myCommentTv, num, myNameTv, editMyCommentTv, deleteMyCommentTv;
     private RatingBar star;
     private TextView Profiletitle,Profileauthor,Profilegenre,Profileday,Profilefavorite,Profiledesc;
-    private ImageView Profileimg;
+    private ImageView Profileimg, myProfileImg;
     private Button Profileurl;
-
+    private LinearLayout myCommentLayout;
+    private EditText commentDialog;
     private int webtoonId;
-    private String webtoonTitle, webtoonPlatform;
+    private String webtoonTitle, webtoonPlatform, userName, userProfileUrl, userComment;
+    private float userRate;
 
     private Toolbar toolbar;
 
     private DatabaseReference mDatabase;
 
-    ////lv
     ListView listView;
     MyAdapter adapter;
-   List<ItemData> dataList;
-
+    List<ItemData> dataList;
 
     private String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid(); // 현재 로그인 중인 uid
     @Override
@@ -93,8 +95,110 @@ public class WebtoonProfileActivity extends AppCompatActivity {
         myRateTv = findViewById(R.id.myRateTv);
         star = findViewById(R.id.star);
 
+        num = findViewById(R.id.num);//
+        leaveCommentTv = findViewById(R.id.leaveCommentTv);//
+        editMyCommentTv = findViewById(R.id.editMyCommentTv);
+        deleteMyCommentTv = findViewById(R.id.deleteMyCommentTv);
+        myCommentLayout = findViewById(R.id.myCommentLayout);//
+        myCommentTv = findViewById(R.id.myCommentTv);//
+        myNameTv = findViewById(R.id.myNameTv);
+        myProfileImg = findViewById(R.id.myProfileImg);
+        listView = findViewById(R.id.recomment);//
+
+        editMyCommentTv.setOnClickListener(new View.OnClickListener() { // 내 코멘트 수정
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(WebtoonProfileActivity.this);
+                final View view2 = getLayoutInflater().inflate(R.layout.dialog_comment, null);//
+                commentDialog = view2.findViewById(R.id.commentDialog);//
+                commentDialog.setText(userComment); // 이전에 남긴 코멘트로 채워놓음
+                builder.setView(view2).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("webtoonId", webtoonId);
+                        hashMap.put("comment", commentDialog.getText().toString());
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Comments").child(String.valueOf(webtoonId)).updateChildren(hashMap); // Users에 내 코멘트 업데이트
+
+                        HashMap<String, Object> hashMap2 = new HashMap<>();
+                        hashMap2.put("userId", currentUid);
+                        hashMap2.put("rate", userRate);
+                        hashMap2.put("comment", commentDialog.getText().toString());
+                        FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").child(currentUid).updateChildren(hashMap2); // Webtoons에 내 코멘트 업데이트
+
+                        myNameTv.setText(userName); // 내 이름 띄움
+                        Glide.with(getApplicationContext()).load(userProfileUrl).apply(new RequestOptions().circleCrop()).into(myProfileImg); // 내 프로필 사진 띄움
+                        myCommentTv.setText(commentDialog.getText().toString()); // 내 코멘트 띄움
+                        myCommentLayout.setVisibility(View.VISIBLE); // 내 코멘트 레이아웃 띄움
+                       leaveCommentTv.setVisibility(View.GONE); // 처음 코멘트 남기기 버튼 숨김
+                    }
+                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        deleteMyCommentTv.setOnClickListener(new View.OnClickListener() { // 내 코멘트 삭제
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Comments").child(String.valueOf(webtoonId)).removeValue(); // User Comments항목에서 내 코멘트 지움
+                FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").child(currentUid).removeValue(); // Webtoons Comments항목에서 내 코멘트 지움
+                myCommentLayout.setVisibility(View.GONE); // 코멘트 띄우는 레이아웃 없애기
+                leaveCommentTv.setVisibility(View.VISIBLE); // 초기 코멘트 남기는 부분 띄우기
+            }
+        });
+        leaveCommentTv.setOnClickListener(new View.OnClickListener() {//
+            @Override
+            public void onClick(View view) { // 코멘트 남기기
+                AlertDialog.Builder builder = new AlertDialog.Builder(WebtoonProfileActivity.this);
+                final View view2 = getLayoutInflater().inflate(R.layout.dialog_comment, null);//
+                commentDialog = view2.findViewById(R.id.commentDialog);//
+                builder.setView(view2).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("webtoonId", webtoonId);
+                        hashMap.put("comment", commentDialog.getText().toString());
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Comments").child(String.valueOf(webtoonId)).updateChildren(hashMap); // Users에 내 코멘트 업데이트
+
+                        HashMap<String, Object> hashMap2 = new HashMap<>();
+                        hashMap2.put("userId", currentUid);
+                        hashMap2.put("rate", userRate);
+                        hashMap2.put("comment", commentDialog.getText().toString());
+                        FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").child(currentUid).updateChildren(hashMap2); // Webtoons에 내 코멘트 업데이트
+
+                        myNameTv.setText(userName); // 내 이름 띄움
+                        Glide.with(getApplicationContext()).load(userProfileUrl).apply(new RequestOptions().circleCrop()).into(myProfileImg); // 내 프로필 사진 띄움
+                        myCommentTv.setText(commentDialog.getText().toString()); // 내 코멘트 띄움
+                        myCommentLayout.setVisibility(View.VISIBLE); // 내 코멘트 레이아웃 띄움
+                        leaveCommentTv.setVisibility(View.GONE); // 처음 코멘트 남기기 버튼 숨김
+                    }
+                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });//
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Users").child(currentUid).addValueEventListener(new ValueEventListener() { // 사용자 이름, 프로필 이미지 가져와서 변수에 저장해놓는 코드
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserModel userModel = snapshot.getValue(UserModel.class);
+                userName = userModel.name;
+                userProfileUrl = userModel.profileImgUrl;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
 
         //사진,제목,작가,장르,하트수,설명 출력
 
@@ -116,7 +220,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
             }
         });
 
-        mDatabase.child("Webtoons").child(String.valueOf(webtoonId-1)).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Webtoons").child(String.valueOf(webtoonId-1)).addListenerForSingleValueEvent(new ValueEventListener() { // 웹툰 정보 가져옴
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -129,7 +233,6 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                 hashMap.put("desc", webtoonModel.story);
                 hashMap.put("day", webtoonModel.day);
                 hashMap.put("genre", webtoonModel.genre);
-                //hashMap.put("favorite",Integer.toString(webtoonModel.favorite));
                 hashMap.put("id", Integer.toString(webtoonModel.webtoonId));
 
                 //hashMap.clear();
@@ -142,10 +245,34 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                 Profileday.setText(hashMap.get("day"));
                 Profiledesc.setText(hashMap.get("desc"));
                 Profilegenre.setText(hashMap.get("genre"));
-                //Profilefavorite.setText(hashMap.get("favorite"));
-
                 Profileimg.setImageResource(getResources().getIdentifier("img"+hashMap.get("id"),"drawable",getApplicationContext().getPackageName()));
 
+                mDatabase.child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").addValueEventListener(new ValueEventListener() { // 다른 사람들 코멘트 가져옴
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        dataList = new ArrayList<>();
+                        int cnt=0;
+                        for (DataSnapshot snapshot : datasnapshot.getChildren()){
+                            final CommentModel commentModel = snapshot.getValue(CommentModel.class);
+                            if(commentModel.comment == null || commentModel.userId.equals(currentUid)) continue; // 코멘트를 남기지 않은 사람이거나 본인 코멘트일 땐 넘김
+                            cnt++;
+                            mDatabase.child("Users").child(commentModel.userId).addListenerForSingleValueEvent(new ValueEventListener() { // 코멘트 남긴 사람 정보 가져옴
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
+                                    UserModel userModel = datasnapshot1.getValue(UserModel.class);
+                                    dataList.add(new ItemData(userModel.name,userModel.profileImgUrl,commentModel.comment,commentModel.rate));
+                                    adapter = new MyAdapter(WebtoonProfileActivity.this,dataList);
+                                    listView.setAdapter(adapter);
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) { }
+                            });
+                        }
+                        num.setText("("+cnt+")");
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
 
             }
 
@@ -170,7 +297,6 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                         hashMap.put("url", webtoonModel.url);
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(hashMap.get("url")));
                         startActivity(intent);
-
                     }
 
                     @Override
@@ -245,12 +371,36 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     RatingModel ratingModel = snapshot.getValue(RatingModel.class);
                     if (ratingModel.webtoonId == webtoonId && ratingModel.rate > 0) { // 평가한 데이터만 가져올거다
+                        userRate = ratingModel.rate; // 사용자가 남긴 별점 값 변수에 저장
                         star.setRating(ratingModel.rate);
                         myRateTv.setText("★ " + ratingModel.rate);
                         myRateTv.setTextColor(Color.parseColor("#1F7AE2"));
+                        leaveCommentTv.setVisibility(View.VISIBLE);//
                         break;
                     }
                 }
+                FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Comments").addValueEventListener(new ValueEventListener() { // 코멘트 남긴거 있으면 가져오는 코드
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot2) {
+                        for (DataSnapshot snapshot : datasnapshot2.getChildren()) {
+                            CommentModel commentModel = snapshot.getValue(CommentModel.class);
+                            if (commentModel.webtoonId == webtoonId) { // 코멘트를 남긴 경우에만 가져옴
+                                myNameTv.setText(userName); // 내 이름 띄움
+                                Glide.with(getApplicationContext()).load(userProfileUrl).apply(new RequestOptions().circleCrop()).into(myProfileImg); // 내 프로필 사진 띄움
+                                myCommentTv.setText(commentModel.comment); // 내 코멘트 띄움
+                                userComment = commentModel.comment; // 코멘트 수정 기능을 위해 변수에 저장해놓음
+                                myCommentLayout.setVisibility(View.VISIBLE);
+                                leaveCommentTv.setVisibility(View.GONE);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Favorites").addValueEventListener(new ValueEventListener() { // 하트 미리 채워넣는 코드
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
@@ -275,11 +425,17 @@ public class WebtoonProfileActivity extends AppCompatActivity {
         star.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() { // 평점 남길 때마다 발생하는 이벤트
             @Override
             public void onRatingChanged(RatingBar ratingBar, final float v, final boolean b) {
+                userRate = v; // 사용자가 남긴 별점 값 변수에 저장
                 if(v == 0) {
                     FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").child(String.valueOf(webtoonId)).removeValue(); // 0점은 평가 안 한거니까
                     star.setRating(v);
                     myRateTv.setText("아직 평가를 하지 않았어요");
                     myRateTv.setTextColor(Color.parseColor("#808080"));
+
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Comments").child(String.valueOf(webtoonId)).removeValue(); // User Comments항목에서 내 코멘트 지움
+                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").child(currentUid).removeValue(); // Webtoons Comments항목에서 내 코멘트 지움
+                    myCommentLayout.setVisibility(View.GONE); // 코멘트 띄우는 레이아웃 없애기
+                    leaveCommentTv.setVisibility(View.GONE); // 초기 코멘트도 못 남기게 없애기
                 }
                 else{
                     HashMap<String, Object> hashMap = new HashMap<>();
@@ -289,21 +445,16 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                     star.setRating(v);
                     myRateTv.setText("★" + v);
                     myRateTv.setTextColor(Color.parseColor("#1F7AE2"));
+                    leaveCommentTv.setVisibility(View.VISIBLE);//
                     FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid).child("Ratings").child(String.valueOf(webtoonId)).updateChildren(hashMap);
+
+                    HashMap<String, Object> hashMap2 = new HashMap<>();
+                    hashMap2.put("userId", currentUid);
+                    hashMap2.put("rate", v);
+                    FirebaseDatabase.getInstance().getReference().child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").child(currentUid).updateChildren(hashMap2); // Webtoons Comments에 내 평점도 업데이트
                 }
             }
         });
-
-        dataList = new ArrayList<>();
-        listView = (ListView)findViewById(R.id.recomment);
-        dataList.add(new ItemData("yubin",R.drawable.yubin,"재밌어요~",5));
-        dataList.add(new ItemData("yeseo",R.drawable.yeseo,"완전 꿀잼 !",4));
-        dataList.add(new ItemData("sujin",R.drawable.sujin,"제 스타일 아닙니다.",1));
-        //3
-        adapter = new MyAdapter(this,dataList);
-        listView.setAdapter(adapter);
-
-
 
     }
 

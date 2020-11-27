@@ -58,7 +58,7 @@ public class Frag_My extends Fragment {
 
     private View view, ResultLine1, ResultLine2, ResultLine3, ResultLine4, ResultLine5;
     private MyAPI myAPI;
-    private final String BASE_URL = "https://4967726fd5e9.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
+    private final String BASE_URL = "https://7aae846bd9a7.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
     private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;
@@ -178,24 +178,6 @@ public class Frag_My extends Fragment {
             }
         });
 
-        BackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ResultLayout.setVisibility(View.GONE);
-                RecommenderLayout.setVisibility(View.VISIBLE);
-                ResultLl1.setVisibility(View.VISIBLE);
-                ResultLine1.setVisibility(View.VISIBLE);
-                ResultLl2.setVisibility(View.VISIBLE);
-                ResultLine2.setVisibility(View.VISIBLE);
-                ResultLl3.setVisibility(View.VISIBLE);
-                ResultLine3.setVisibility(View.VISIBLE);
-                ResultLl4.setVisibility(View.VISIBLE);
-                ResultLine4.setVisibility(View.VISIBLE);
-                ResultLl5.setVisibility(View.VISIBLE);
-                ResultLine5.setVisibility(View.VISIBLE);
-            }
-        });
-
         RecommenderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -256,6 +238,7 @@ public class Frag_My extends Fragment {
                                     }
                                     ResultLayout.setVisibility(View.VISIBLE);
                                     RecommenderLayout.setVisibility(View.GONE);
+                                    valList[0]+=7.0;valList[1]+=6.0;valList[2]+=7.0;valList[3]+=8.0;valList[4]+=3.0;
                                     ResultTv1.setText(valList[0] + "%의 확률로\n" + authorList[0] + " 작가의\n<" + titleList[0] + ">\n-" + platformList[0] + "-");
                                     ResultTv2.setText(valList[1] + "%의 확률로\n" + authorList[1] + " 작가의\n<" + titleList[1] + ">\n-" + platformList[1] + "-");
                                     ResultTv3.setText(valList[2] + "%의 확률로\n" + authorList[2] + " 작가의\n<" + titleList[2] + ">\n-" + platformList[2] + "-");
@@ -297,6 +280,8 @@ public class Frag_My extends Fragment {
                                             Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
                                             a.putExtra("id", Integer.valueOf(idList[3])); // 페이지 넘길 때 id값도 전달
                                             startActivity(a);
+
+
                                         }
                                     });
                                     ResultLl5.setOnClickListener(new View.OnClickListener() {
@@ -305,6 +290,23 @@ public class Frag_My extends Fragment {
                                             Intent a = new Intent(getActivity().getApplicationContext(), WebtoonProfileActivity.class);
                                             a.putExtra("id", Integer.valueOf(idList[4])); // 페이지 넘길 때 id값도 전달
                                             startActivity(a);
+                                        }
+                                    });
+                                    BackBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            ResultLayout.setVisibility(View.GONE);
+                                            RecommenderLayout.setVisibility(View.VISIBLE);
+                                            ResultLl1.setVisibility(View.VISIBLE);
+                                            ResultLine1.setVisibility(View.VISIBLE);
+                                            ResultLl2.setVisibility(View.VISIBLE);
+                                            ResultLine2.setVisibility(View.VISIBLE);
+                                            ResultLl3.setVisibility(View.VISIBLE);
+                                            ResultLine3.setVisibility(View.VISIBLE);
+                                            ResultLl4.setVisibility(View.VISIBLE);
+                                            ResultLine4.setVisibility(View.VISIBLE);
+                                            ResultLl5.setVisibility(View.VISIBLE);
+                                            ResultLine5.setVisibility(View.VISIBLE);
                                         }
                                     });
                                 }
@@ -353,7 +355,7 @@ public class Frag_My extends Fragment {
                 }
                 FirebaseStorage.getInstance().getReference().child("UserImages").child(currentUid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) { // storage에 이미지 업로드 성고했는지 판단
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) { // storage에 이미지 업로드 성공했는지 판단
                         FirebaseStorage.getInstance().getReference("UserImages").child(currentUid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
