@@ -58,7 +58,7 @@ public class Frag_My extends Fragment {
 
     private View view, ResultLine1, ResultLine2, ResultLine3, ResultLine4, ResultLine5;
     private MyAPI myAPI;
-    private final String BASE_URL = "https://7aae846bd9a7.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
+    private final String BASE_URL = "https://4ad5aa96ec80.ngrok.io/"; // Django 서버에서 runserver하고 ngrok.exe에서 ngrok http 8000하고 얻은 주소 넣어야 함
     private final String TAG = getClass().getSimpleName();
     private EditText nameProfileDialog;
     private Button RecommenderBtn, BackBtn, editProfileBtn, RatingBtn;
@@ -238,12 +238,12 @@ public class Frag_My extends Fragment {
                                     }
                                     ResultLayout.setVisibility(View.VISIBLE);
                                     RecommenderLayout.setVisibility(View.GONE);
-                                    valList[0]+=7.0;valList[1]+=6.0;valList[2]+=7.0;valList[3]+=8.0;valList[4]+=3.0;
-                                    ResultTv1.setText(valList[0] + "%의 확률로\n" + authorList[0] + " 작가의\n<" + titleList[0] + ">\n-" + platformList[0] + "-");
-                                    ResultTv2.setText(valList[1] + "%의 확률로\n" + authorList[1] + " 작가의\n<" + titleList[1] + ">\n-" + platformList[1] + "-");
-                                    ResultTv3.setText(valList[2] + "%의 확률로\n" + authorList[2] + " 작가의\n<" + titleList[2] + ">\n-" + platformList[2] + "-");
-                                    ResultTv4.setText(valList[3] + "%의 확률로\n" + authorList[3] + " 작가의\n<" + titleList[3] + ">\n-" + platformList[3] + "-");
-                                    ResultTv5.setText(valList[4] + "%의 확률로\n" + authorList[4] + " 작가의\n<" + titleList[4] + ">\n-" + platformList[4] + "-");
+//                                    valList[0]+=7.0;valList[1]+=6.0;valList[2]+=7.0;valList[3]+=8.0;valList[4]+=3.0;
+                                    ResultTv1.setText((int)valList[0] + "%의 확률로\n" + authorList[0] + " 작가의\n<" + titleList[0] + ">\n-" + platformList[0] + "-");
+                                    ResultTv2.setText((int)valList[1] + "%의 확률로\n" + authorList[1] + " 작가의\n<" + titleList[1] + ">\n-" + platformList[1] + "-");
+                                    ResultTv3.setText((int)valList[2] + "%의 확률로\n" + authorList[2] + " 작가의\n<" + titleList[2] + ">\n-" + platformList[2] + "-");
+                                    ResultTv4.setText((int)valList[3] + "%의 확률로\n" + authorList[3] + " 작가의\n<" + titleList[3] + ">\n-" + platformList[3] + "-");
+                                    ResultTv5.setText((int)valList[4] + "%의 확률로\n" + authorList[4] + " 작가의\n<" + titleList[4] + ">\n-" + platformList[4] + "-");
                                     if(getActivity() != null) ResultImg1.setImageResource(getResources().getIdentifier("img" + idList[0], "drawable", getActivity().getPackageName()));
                                     if(getActivity() != null) ResultImg2.setImageResource(getResources().getIdentifier("img" + idList[1], "drawable", getActivity().getPackageName()));
                                     if(getActivity() != null) ResultImg3.setImageResource(getResources().getIdentifier("img" + idList[2], "drawable", getActivity().getPackageName()));

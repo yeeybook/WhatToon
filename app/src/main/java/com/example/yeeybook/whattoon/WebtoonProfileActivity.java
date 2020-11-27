@@ -46,16 +46,16 @@ import java.util.List;
 
 public class WebtoonProfileActivity extends AppCompatActivity {
     private ToggleButton favoriteBtn;
-    private TextView myRateTv, leaveCommentTv, myCommentTv, num, myNameTv, editMyCommentTv, deleteMyCommentTv;
     private RatingBar star;
     private TextView Profiletitle,Profileauthor,Profilegenre,Profileday,Profilefavorite,Profiledesc;
+    private TextView myRateTv, leaveCommentTv, myCommentTv, num, myNameTv, editMyCommentTv, deleteMyCommentTv, avgRateTv;
     private ImageView Profileimg, myProfileImg;
     private Button Profileurl;
     private LinearLayout myCommentLayout;
     private EditText commentDialog;
-    private int webtoonId;
+    private int webtoonId, cnt;
     private String webtoonTitle, webtoonPlatform, userName, userProfileUrl, userComment;
-    private float userRate;
+    private float userRate, avg, avg_cnt;
 
     private Toolbar toolbar;
 
@@ -93,6 +93,7 @@ public class WebtoonProfileActivity extends AppCompatActivity {
         Profileurl=findViewById(R.id.Profileurl);
         favoriteBtn = findViewById(R.id.favoriteBtn);
         myRateTv = findViewById(R.id.myRateTv);
+        avgRateTv = findViewById(R.id.avgRateTv);
         star = findViewById(R.id.star);
 
         num = findViewById(R.id.num);//
@@ -250,25 +251,38 @@ public class WebtoonProfileActivity extends AppCompatActivity {
                 mDatabase.child("Webtoons").child(String.valueOf(webtoonId-1)).child("Comments").addValueEventListener(new ValueEventListener() { // 다른 사람들 코멘트 가져옴
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        avg = 0;
+                        cnt = 0;
+                        avg_cnt = 0; // 초기화
                         dataList = new ArrayList<>();
-                        int cnt=0;
                         for (DataSnapshot snapshot : datasnapshot.getChildren()){
                             final CommentModel commentModel = snapshot.getValue(CommentModel.class);
-                            if(commentModel.comment == null || commentModel.userId.equals(currentUid)) continue; // 코멘트를 남기지 않은 사람이거나 본인 코멘트일 땐 넘김
-                            cnt++;
+                            avg_cnt++;
+                            if(commentModel.comment == null || commentModel.userId.equals(currentUid)){
+                                avg += commentModel.rate; // 평균 계산 위해
+                                String res = String.format("%.2f", avg/avg_cnt); // 평균 소수점 둘째 자리까지 계산
+                                avgRateTv.setText("평균 ★ "+ res);
+                                continue; // 코멘트를 남기지 않은 사람이거나 본인 코멘트일 땐 띄우지 않고 넘김
+                            }
                             mDatabase.child("Users").child(commentModel.userId).addListenerForSingleValueEvent(new ValueEventListener() { // 코멘트 남긴 사람 정보 가져옴
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
                                     UserModel userModel = datasnapshot1.getValue(UserModel.class);
+                                    cnt++;
                                     dataList.add(new ItemData(userModel.name,userModel.profileImgUrl,commentModel.comment,commentModel.rate));
                                     adapter = new MyAdapter(WebtoonProfileActivity.this,dataList);
-                                    listView.setAdapter(adapter);
+                                    listView.setAdapter(adapter); // 코멘트 리스트에 추가
+                                    avg += commentModel.rate; // 평균 계산 위해
+                                    String res = String.format("%.2f", avg/avg_cnt); // 평균 소수점 둘째 자리까지 계산
+                                    avgRateTv.setText("평균 ★ "+ res);
+                                    num.setText("("+cnt+")");
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) { }
                             });
                         }
-                        num.setText("("+cnt+")");
+//                        num.setText("("+cnt+")");
+//                        avgRateTv.setText("평균 ★ "+avg/cnt);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) { }
